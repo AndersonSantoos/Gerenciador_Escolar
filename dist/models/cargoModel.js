@@ -26,16 +26,6 @@ Cargo.init({
     }
 }, {
     sequelize: dbConfig_1.sequelize,
-    modelName: 'Cargo',
     tableName: 'Cargo'
 });
-(async () => {
-    try {
-        await dbConfig_1.sequelize.sync();
-        console.log('Modelo sincronizado com o banco de dados');
-    }
-    catch (error) {
-        console.error('Erro ao sincronizar o modelo:', error);
-    }
-})();
 exports.default = Cargo;

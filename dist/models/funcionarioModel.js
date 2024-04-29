@@ -1,66 +1,60 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const sequelize_1 = require("sequelize");
-const dbConfig_1 = require("../database/dbConfig");
-const cargoModel_1 = __importDefault(require("./cargoModel"));
-class Funcionario extends sequelize_1.Model {
-}
-Funcionario.init({
-    funcionario_id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-    },
-    nome: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    },
-    cargo_id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    },
-    status: {
-        type: sequelize_1.DataTypes.ENUM('ativo', 'inativo'),
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    },
-    email: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    },
-    filial: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    }
-}, {
-    sequelize: dbConfig_1.sequelize,
-    modelName: 'Funcionario',
-    tableName: 'funcionarios'
-});
-Funcionario.belongsTo(cargoModel_1.default, { foreignKey: 'cargo_id', as: 'cargo' });
-(async () => {
-    try {
-        await dbConfig_1.sequelize.sync();
-        console.log('Modelo sincronizado com o banco de dados');
-    }
-    catch (error) {
-        console.error('Erro ao sincronizar o modelo:', error);
-    }
-})();
+// import { Model, DataTypes } from 'sequelize';
+// import { sequelize } from '../database/dbConfig';
+// import Cargo from './cargoModel';
+// class Funcionario extends Model {
+//     public funcionario_id!: number;
+//     public nome!: string;
+//     public cargo_id!: number;
+//     public status!: string;
+//     public email!: string;
+//     public filial!: string;
+// }
+// Funcionario.init(
+//     {
+//         funcionario_id: {
+//             type: DataTypes.INTEGER,
+//             autoIncrement: true,
+//             primaryKey: true,
+//         },
+//         nome: {
+//             type: DataTypes.STRING,
+//             allowNull: false,
+//             validate: {
+//                 notEmpty: { msg: 'Campo não pode estar vazio' }
+//             }
+//         }, 
+//         cargo_id: {
+//             type: DataTypes.INTEGER,
+//             allowNull: false,
+//             validate: {
+//                 notEmpty: { msg: 'Campo não pode estar vazio' }
+//             }
+//         }, 
+//         status: {
+//             type: DataTypes.ENUM('ativo', 'inativo'),
+//             allowNull: false,
+//             validate: {
+//                 notEmpty: { msg: 'Campo não pode estar vazio' }
+//             }
+//         }, 
+//         email: {
+//             type: DataTypes.STRING,
+//             allowNull: false,
+//             validate: {
+//                 notEmpty: { msg: 'Campo não pode estar vazio' }
+//             }
+//         }, 
+//         filial: {
+//             type: DataTypes.STRING,
+//             allowNull: false,
+//             validate: {
+//                 notEmpty: { msg: 'Campo não pode estar vazio' }
+//             }
+//         } 
+//     }, {
+//         sequelize,
+//         tableName: 'funcionarios'
+//     });
+// Funcionario.belongsTo(Cargo, { foreignKey: 'cargo_id', as: 'cargo' });
+// export default Funcionario;
