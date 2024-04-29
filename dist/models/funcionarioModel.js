@@ -52,7 +52,7 @@ Funcionario.init({
     }
 }, {
     sequelize: dbConfig_1.sequelize,
-    tableName: 'funcionarios'
+    tableName: 'Funcionarios'
 });
 Funcionario.belongsTo(cargoModel_1.default, { foreignKey: 'cargo_id', as: 'cargo' });
 exports.default = Funcionario;
