@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
-import cargoModel from './cargoModel';
+import Cargo from './cargoModel';
 
 class Funcionario extends Model {
     public funcionario_id!: number;
@@ -59,7 +59,7 @@ Funcionario.init(
         tableName: 'funcionarios'
     });
 
-Funcionario.belongsTo(cargoModel, { foreignKey: 'cargo_id', as: 'cargo' });
+Funcionario.belongsTo(Cargo, { foreignKey: 'cargo_id', as: 'cargo' });
 
 (async () => {
     try {
