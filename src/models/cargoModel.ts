@@ -33,5 +33,4 @@ Cargo.init(
         tableName: 'Cargo'
 });
 
-
 export default Cargo;
