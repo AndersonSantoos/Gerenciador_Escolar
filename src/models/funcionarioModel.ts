@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
-import cargoModel from './cargoModel';
+import Cargo from './cargoModel';
 
 class Funcionario extends Model {
     public funcionario_id!: number;
@@ -28,8 +28,9 @@ Funcionario.init(
         cargo_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notEmpty: { msg: 'Campo não pode estar vazio' }
+            references: {
+                model: 'Cargo',
+                key: 'cargo_id',
             }
         }, 
         status: {
@@ -55,17 +56,9 @@ Funcionario.init(
         } 
     }, {
         sequelize,
-        modelName: 'Funcionario',
         tableName: 'funcionarios'
     });
 
-Funcionario.belongsTo(cargoModel, { foreignKey: 'cargo_id', as: 'cargo' });
+Funcionario.belongsTo(Cargo, { foreignKey: 'cargo_id', as: 'cargo' });
 
-(async () => {
-    try {
-        await sequelize.sync();
-        console.log('Modelo sincronizado com o banco de dados');
-    } catch (error) {
-        console.error('Erro ao sincronizar o modelo:', error);
-    }
-})();
+export default Funcionario;
