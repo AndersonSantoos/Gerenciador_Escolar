@@ -56,7 +56,7 @@ Funcionario.init(
         } 
     }, {
         sequelize,
-        tableName: 'funcionarios'
+        tableName: 'Funcionarios'
     });
 
 Funcionario.belongsTo(Cargo, { foreignKey: 'cargo_id', as: 'cargo' });
