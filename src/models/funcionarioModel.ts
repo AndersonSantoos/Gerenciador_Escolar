@@ -4,8 +4,9 @@ import Cargo from './cargoModel';
 
 class Funcionario extends Model {
     public funcionario_id!: number;
-    public nome!: string;
     public cargo_id!: number;
+    public nome!: string;
+    public senha!: string;
     public status!: string;
     public email!: string;
     public filial!: string;
@@ -18,13 +19,6 @@ Funcionario.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        nome: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: { msg: 'Campo não pode estar vazio' }
-            }
-        }, 
         cargo_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -33,6 +27,20 @@ Funcionario.init(
                 key: 'cargo_id',
             }
         }, 
+        nome: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: { msg: 'Campo não pode estar vazio' }
+            }
+        },
+        senha: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            },
+        },
         status: {
             type: DataTypes.ENUM('ativo', 'inativo'),
             allowNull: false,

@@ -14,13 +14,6 @@ Funcionario.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    nome: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-    },
     cargo_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
@@ -28,6 +21,20 @@ Funcionario.init({
             model: 'Cargo',
             key: 'cargo_id',
         }
+    },
+    nome: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: 'Campo não pode estar vazio' }
+        }
+    },
+    senha: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
     },
     status: {
         type: sequelize_1.DataTypes.ENUM('ativo', 'inativo'),

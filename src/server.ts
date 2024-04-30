@@ -1,13 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { sequelize } from './database/dbConfig';
+import funcionarioRoutes from './routes/funcionarioRoutes';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+app.use('/', funcionarioRoutes);
 
-
-app.listen(port, async() => {
+app.listen(port, async () => {
     console.log(`Servidor rodando na porta? ${port}`);
     try {
         await sequelize.sync();
