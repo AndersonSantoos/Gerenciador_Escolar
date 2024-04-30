@@ -7,7 +7,9 @@ import cargooRoutes from './routes/cargoRoutes';
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(bodyParser.json());
+//Routes
 app.use('/', funcionarioRoutes);
 app.use('/', cargooRoutes);
 
