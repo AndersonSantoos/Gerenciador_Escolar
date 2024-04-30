@@ -30,7 +30,7 @@ export const updateCargoById = async (cargo_id: number, newData: Partial<Cargo>)
     }
 }
 
-export const deleteCargoById = async ( cargo_id: number ) => {
+export const deleteCargoById = async ( cargo_id: number ) => { 
     try {
         const cargo = await Cargo.findByPk(cargo_id);
         if(!cargo) {
