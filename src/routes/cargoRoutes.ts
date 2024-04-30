@@ -1,0 +1,52 @@
+import express, { Request, Response } from "express";
+import { criarCargoController,
+         getCargoControllerById,
+         updateCargoControllerById,
+         deleteCargoControllerById } from "../controllers/cargoController";
+         
+const router = express.Router();
+
+router.post('/registrarCargo', async (req: Request, res: Response) =>{
+    try {
+        await criarCargoController(req, res);
+    } catch ( error: any ) {
+        res.status(500).send(error.message);
+    }
+});
+
+router.get('/cargo/:cargo_id', async (req: Request, res: Response) => {
+    try {
+        const cargo = await getCargoControllerById(req, res);
+        
+        if (cargo === null) {
+            return res.status(404).send('Cargo não encontrado.');
+        }
+
+        res.status(200).json(cargo);
+    } catch (error) {
+        console.error('Erro na rota:', error);
+        res.status(500).json({ error: 'Erro interno do servidor.' });
+    }
+});
+
+router.put('/cargo/:cargo_id', async (req: Request, res: Response) => {
+  try {
+    const updateCargo = await updateCargoControllerById(req, res);
+    res.sendStatus(200).json(updateCargo);
+  } catch ( error ) {
+    console.error('Erro na rota', error);
+    res.status(500)
+  }
+});
+
+router.delete('/cargo/:cargo_id', async (req: Request, res: Response) => {
+  try {
+    const result = await deleteCargoControllerById(req, res);
+    res.status(200).json({ message: result });
+  } catch (error) {
+    console.error('Erro na rota', error);
+    res.status(500).json('Erro interno do servidor.')
+  }
+})
+
+export default router;
