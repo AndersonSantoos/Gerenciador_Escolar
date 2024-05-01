@@ -33,7 +33,7 @@ export const updateFuncionarioById = async (funcionario_id: number, newData: Par
         if(!funcionario) {
             throw new Error('Funcionário não encontrado.');
         }
-        await Funcionario.update(newData, { where: {id: funcionario_id}});
+        await Funcionario.update(newData, { where: {funcionario_id: funcionario_id}});
         return funcionario;
     } catch ( error ) {
         throw new Error('Erro na atualização do funcionário por ID.')

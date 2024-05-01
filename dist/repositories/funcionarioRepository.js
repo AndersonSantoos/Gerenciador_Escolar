@@ -39,7 +39,7 @@ const updateFuncionarioById = async (funcionario_id, newData) => {
         if (!funcionario) {
             throw new Error('Funcionário não encontrado.');
         }
-        await funcionarioModel_1.default.update(newData, { where: { id: funcionario_id } });
+        await funcionarioModel_1.default.update(newData, { where: { funcionario_id: funcionario_id } });
         return funcionario;
     }
     catch (error) {

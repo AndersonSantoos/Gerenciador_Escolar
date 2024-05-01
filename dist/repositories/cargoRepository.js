@@ -29,8 +29,9 @@ const updateCargoById = async (cargo_id, newData) => {
         if (!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        await cargoModel_1.default.update(newData, { where: { id: cargo_id } });
-        return cargo;
+        await cargoModel_1.default.update(newData, { where: { cargo_id: cargo_id } });
+        const cargoAtualizado = await cargoModel_1.default.findByPk(cargo_id);
+        return cargoAtualizado;
     }
     catch (error) {
         throw new Error('Erro na atualização do cargo por ID.');
@@ -43,11 +44,11 @@ const deleteCargoById = async (cargo_id) => {
         if (!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        await cargo.destroy();
-        return 'Funcionário deleteado com sucesso!';
+        const cargoDeletado = await cargo.destroy();
+        return (cargoDeletado);
     }
     catch (error) {
-        throw new Error('Erro enquanto deletava o funcionário pelo ID.');
+        throw new Error('Erro enquanto deletava o cargo pelo ID.');
     }
 };
 exports.deleteCargoById = deleteCargoById;

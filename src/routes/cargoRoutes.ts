@@ -31,22 +31,20 @@ router.get('/cargo/:cargo_id', async (req: Request, res: Response) => {
 
 router.put('/cargo/:cargo_id', async (req: Request, res: Response) => {
   try {
-    const updateCargo = await updateCargoControllerById(req, res);
-    res.sendStatus(200).json(updateCargo);
+      await updateCargoControllerById(req, res); 
   } catch ( error ) {
-    console.error('Erro na rota', error);
-    res.status(500)
+      console.error('Erro na rota', error);
+      res.status(500).json({ message: 'Erro interno do servidor.'})
   }
 });
 
 router.delete('/cargo/:cargo_id', async (req: Request, res: Response) => {
   try {
-    const result = await deleteCargoControllerById(req, res);
-    res.status(200).json({ message: result });
+      await deleteCargoControllerById(req, res);
   } catch (error) {
-    console.error('Erro na rota', error);
-    res.status(500).json('Erro interno do servidor.')
+      console.error('Erro na rota', error);
+      res.status(500).json('Erro interno do servidor.');
   }
-})
+});
 
 export default router;

@@ -23,22 +23,23 @@ export const updateCargoById = async (cargo_id: number, newData: Partial<Cargo>)
         if(!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        await Cargo.update(newData, { where: {id: cargo_id}});
-        return cargo;
+        await Cargo.update(newData, { where: {cargo_id: cargo_id}});
+        const cargoAtualizado = await Cargo.findByPk(cargo_id);
+        return cargoAtualizado; 
     } catch ( error ) {
         throw new Error('Erro na atualização do cargo por ID.')
     }
 }
 
-export const deleteCargoById = async ( cargo_id: number ) => { 
+export const deleteCargoById = async (cargo_id: number) => { 
     try {
         const cargo = await Cargo.findByPk(cargo_id);
-        if(!cargo) {
+        if (!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        await cargo.destroy();
-        return 'Funcionário deleteado com sucesso!'
-    } catch ( error ) {
-        throw new Error('Erro enquanto deletava o funcionário pelo ID.')
+        const cargoDeletado = await cargo.destroy();
+        return (cargoDeletado);
+    } catch (error) {
+        throw new Error('Erro enquanto deletava o cargo pelo ID.');
     }
 }
