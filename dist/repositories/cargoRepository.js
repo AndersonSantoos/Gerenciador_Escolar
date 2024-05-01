@@ -44,8 +44,8 @@ const deleteCargoById = async (cargo_id) => {
         if (!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        const cargoDeletado = await cargo.destroy();
-        return (cargoDeletado);
+        await cargo.destroy();
+        return ('Cargo deletado com sucesso!');
     }
     catch (error) {
         throw new Error('Erro enquanto deletava o cargo pelo ID.');

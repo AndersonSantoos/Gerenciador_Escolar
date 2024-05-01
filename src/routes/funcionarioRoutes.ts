@@ -15,19 +15,19 @@ router.post('/registrarFuncionario', async (req: Request, res: Response) => {
 }); 
 
 router.get('/funcionario/:funcionario_id', async (req: Request, res: Response) => {
-    try {
-      const funcionario = await getFuncionarioControllerById(req, res);
-      
-      if (!funcionario) {
-        return res.status(404).send('Funcionário não encontrado.');
-      }
-  
-      res.status(200).json(funcionario);
-    } catch (error) {
-      console.error('Erro na rota.:', error);
-      res.status(500).json({ error: 'Erro interno do servidor.' });
+  try{
+    const funcionario = await getFuncionarioControllerById(req, res);
+    if(funcionario === null) {
+      return res.status(404).send('Fucnionário não encontrado.')
     }
-  });
+    res.status(200).json(funcionario);
+  } catch ( error ) {
+    console.error('Erro na rota:', error);
+    res.status(500).json({error: 'Erro interno do servidor.'})
+  }
+});
+
+
 
   router.put('/funcionario/:funcionario_id', async (req: Request, res: Response) => {
     try {

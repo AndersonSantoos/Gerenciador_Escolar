@@ -10,12 +10,12 @@ var StatusFuncionario;
     StatusFuncionario["Ativo"] = "ativo";
     StatusFuncionario["Inativo"] = "inativo";
 })(StatusFuncionario || (StatusFuncionario = {}));
-const criarFuncionario = async (cargo_id, nome, senha, status, email, filial) => {
+const criarFuncionario = async (cargo_id, nome, status, email, filial, senha) => {
     try {
-        if (!(status in StatusFuncionario)) {
+        if (!(Object.values(StatusFuncionario).includes(status))) {
             throw new Error('Status inválido');
         }
-        return await funcionarioModel_1.default.create({ cargo_id, nome, senha, status, email, filial });
+        return await funcionarioModel_1.default.create({ cargo_id, nome, status, email, filial, senha });
     }
     catch (error) {
         console.error('Erro ao criar funcionário', error);
@@ -54,7 +54,7 @@ const deleteFuncionarioById = async (funcionario_id) => {
             throw new Error('Funcionário não encontrado.');
         }
         await funcionario.destroy();
-        return 'Funcionário deleteado com sucesso!';
+        return 'Funcionário deletado com sucesso!';
     }
     catch (error) {
         throw new Error('Erro enquanto deletava o funcionário pelo ID.');

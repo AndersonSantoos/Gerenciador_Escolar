@@ -40,7 +40,8 @@ router.put('/cargo/:cargo_id', async (req: Request, res: Response) => {
 
 router.delete('/cargo/:cargo_id', async (req: Request, res: Response) => {
   try {
-      await deleteCargoControllerById(req, res);
+      const result = await deleteCargoControllerById(req, res);
+      res.status(200).json({ message: result });
   } catch (error) {
       console.error('Erro na rota', error);
       res.status(500).json('Erro interno do servidor.');

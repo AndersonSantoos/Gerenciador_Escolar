@@ -5,13 +5,19 @@ enum StatusFuncionario {
     Inativo = 'inativo'
 }
 
-export const criarFuncionario = async (cargo_id: number, nome: string, senha: string,
-     status: StatusFuncionario, email: string, filial: string) => {
+export const criarFuncionario = async (
+    cargo_id: number,
+    nome: string,
+    status: StatusFuncionario,
+    email: string,
+    filial: string,
+    senha: string
+) => {
     try {
-        if (!(status in StatusFuncionario)) {
+        if (!(Object.values(StatusFuncionario).includes(status))) {
             throw new Error('Status inválido');
         }
-        return await Funcionario.create({ cargo_id, nome, senha, status, email, filial });
+        return await Funcionario.create({ cargo_id, nome, status, email, filial, senha });
     } catch (error) {
         console.error('Erro ao criar funcionário', error);
         throw error;
@@ -47,7 +53,7 @@ export const deleteFuncionarioById = async ( funcionario_id: number ) => {
             throw new Error('Funcionário não encontrado.');
         }
         await funcionario.destroy();
-        return 'Funcionário deleteado com sucesso!'
+        return 'Funcionário deletado com sucesso!'
     } catch ( error ) {
         throw new Error('Erro enquanto deletava o funcionário pelo ID.')
     }

@@ -38,7 +38,8 @@ router.put('/cargo/:cargo_id', async (req, res) => {
 });
 router.delete('/cargo/:cargo_id', async (req, res) => {
     try {
-        await (0, cargoController_1.deleteCargoControllerById)(req, res);
+        const result = await (0, cargoController_1.deleteCargoControllerById)(req, res);
+        res.status(200).json({ message: result });
     }
     catch (error) {
         console.error('Erro na rota', error);

@@ -17,13 +17,13 @@ router.post('/registrarFuncionario', async (req, res) => {
 router.get('/funcionario/:funcionario_id', async (req, res) => {
     try {
         const funcionario = await (0, funcionarioController_1.getFuncionarioControllerById)(req, res);
-        if (!funcionario) {
-            return res.status(404).send('Funcionário não encontrado.');
+        if (funcionario === null) {
+            return res.status(404).send('Fucnionário não encontrado.');
         }
         res.status(200).json(funcionario);
     }
     catch (error) {
-        console.error('Erro na rota.:', error);
+        console.error('Erro na rota:', error);
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });

@@ -40,11 +40,10 @@ export const updateCargoControllerById = async (req: Request, res: Response) => 
 };
 
 export const deleteCargoControllerById = async (req: Request, res: Response) => {
-    const { cargo_id } = req.params;
     try {
-        await deleteCargoById(parseInt(cargo_id, 10));
-        res.status(204).json({ message: 'Cargo deletado com sucesso.'});
-        console.log('Cargo deletado com sucesso.')
+        const { cargo_id } = req.params;
+        const result = await deleteCargoById(parseInt(cargo_id, 10));
+        return result;
     } catch (error) {
         console.error('Erro ao excluir cargo por ID', error);
         res.status(500).json({ message: 'Erro ao excluir cargo por ID' });
