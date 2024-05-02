@@ -4,6 +4,7 @@ import { sequelize } from './database/dbConfig';
 import funcionarioRoutes from './routes/funcionarioRoutes';
 import cargoRoutes from './routes/cargoRoutes';
 import servicoRoutes from './routes/servicoRoutes';
+import tipo_servicoRoutes from './routes/tipo_servicoRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use('/', funcionarioRoutes);
 app.use('/', cargoRoutes);
 app.use('/', servicoRoutes);
+app.use('/', tipo_servicoRoutes);
 
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta? ${port}`);
