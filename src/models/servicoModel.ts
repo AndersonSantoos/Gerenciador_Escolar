@@ -21,7 +21,7 @@ Servico.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Funcionario',
+                model: Funcionario,
                 key: 'funcionario_id'
             },
             onDelete: 'CASCADE',
@@ -36,7 +36,7 @@ Servico.init(
         },
         status: {
             type: DataTypes.ENUM('Ativo', 'Inativo', 'Em andamento', 
-                'Concluído', 'Cancelado', 'Pendente', 'Em espera'
+                'Concluido', 'Cancelado', 'Pendente', 'Em espera'
             ),
             allowNull: false,
             validate: {
@@ -44,8 +44,11 @@ Servico.init(
             }
         },
         prazo_resolucao: {
-            type: DataTypes.DATE,
-            allowNull: true
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                notEmpty: { msg: 'Campo não pode estar vazio '}
+            }
         }
     }, {
         sequelize,

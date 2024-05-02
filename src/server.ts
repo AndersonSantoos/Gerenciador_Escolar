@@ -2,7 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { sequelize } from './database/dbConfig';
 import funcionarioRoutes from './routes/funcionarioRoutes';
-import cargooRoutes from './routes/cargoRoutes';
+import cargoRoutes from './routes/cargoRoutes';
+import servicoRoutes from './routes/servicoRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,7 +12,8 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 //Routes
 app.use('/', funcionarioRoutes);
-app.use('/', cargooRoutes);
+app.use('/', cargoRoutes);
+app.use('/', servicoRoutes);
 
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta? ${port}`);
