@@ -18,7 +18,7 @@ informacoesAdicionais.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Servico',
+            model: servicoModel_1.default,
             key: 'servico_id'
         },
         onDelete: 'CASCADE',
@@ -33,7 +33,7 @@ informacoesAdicionais.init({
     },
 }, {
     sequelize: dbConfig_1.sequelize,
-    tableName: 'infoAdicionais'
+    tableName: 'info_adicionais'
 });
 informacoesAdicionais.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' });
 exports.default = informacoesAdicionais;

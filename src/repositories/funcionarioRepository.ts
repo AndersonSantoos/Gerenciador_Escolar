@@ -1,8 +1,8 @@
 import Funcionario from '../models/funcionarioModel';
 
 enum StatusFuncionario {
-    Ativo = 'ativo',
-    Inativo = 'inativo'
+    Ativo = 'Ativo',
+    Inativo = 'Inativo'
 }
 
 export const criarFuncionario = async (

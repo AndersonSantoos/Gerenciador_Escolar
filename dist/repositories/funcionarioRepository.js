@@ -7,8 +7,8 @@ exports.deleteFuncionarioById = exports.updateFuncionarioById = exports.getFunci
 const funcionarioModel_1 = __importDefault(require("../models/funcionarioModel"));
 var StatusFuncionario;
 (function (StatusFuncionario) {
-    StatusFuncionario["Ativo"] = "ativo";
-    StatusFuncionario["Inativo"] = "inativo";
+    StatusFuncionario["Ativo"] = "Ativo";
+    StatusFuncionario["Inativo"] = "Inativo";
 })(StatusFuncionario || (StatusFuncionario = {}));
 const criarFuncionario = async (cargo_id, nome, status, email, filial, senha) => {
     try {
