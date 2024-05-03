@@ -19,7 +19,7 @@ Anexo.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Servico',
+            model: servicoModel_1.default,
             key: 'servico_id'
         },
         onDelete: 'CASCADE',

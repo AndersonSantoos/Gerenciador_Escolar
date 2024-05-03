@@ -19,7 +19,7 @@ Mensagem.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Servico',
+                model: Servico,
                 key: 'servico_id'
             },
             onDelete: 'CASCADE',
