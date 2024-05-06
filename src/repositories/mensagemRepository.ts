@@ -9,31 +9,31 @@ export const criarMensagem = async (servico_id: number, descricao: string) => {
     }
 }
 
-export const getMensagemById = async (mensagem_id: number) => {
-    const mensagem = await Mensagem.findByPk(mensagem_id);
+export const getMensagemById = async (id: number) => {
+    const mensagem = await Mensagem.findByPk(id);
     if (!mensagem) {
         throw new Error('Mensagem não encontrada.');
     }
     return mensagem;
 };
 
-export const updateMensagemById = async (mensagem_id: number, newData: Partial<Mensagem>) => {
+export const updateMensagemById = async (id: number, newData: Partial<Mensagem>) => {
     try {
-        const mensagem = await Mensagem.findByPk(mensagem_id);
+        const mensagem = await Mensagem.findByPk(id);
         if(!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }
-        await Mensagem.update(newData, { where: {mensagem_id: mensagem_id}});
-        const mensagemAtualizada = await Mensagem.findByPk(mensagem_id);
+        await Mensagem.update(newData, { where: {id: id}});
+        const mensagemAtualizada = await Mensagem.findByPk(id);
         return mensagemAtualizada; 
     } catch ( error ) {
         throw new Error('Erro na atualização da mensagem por ID.')
     }
 }
 
-export const deleteMensagemById = async (mensagem_id: number) => { 
+export const deleteMensagemById = async (id: number) => { 
     try {
-        const mensagem = await Mensagem.findByPk(mensagem_id);
+        const mensagem = await Mensagem.findByPk(id);
         if (!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }

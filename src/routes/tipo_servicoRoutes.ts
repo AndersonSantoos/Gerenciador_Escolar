@@ -14,7 +14,7 @@ router.post('/registrarTipo_servico', async (req: Request, res: Response) => {
     }
 }); 
 
-router.get('/tipo_servico/:tipo_servico_id', async (req: Request, res: Response) => {
+router.get('/tipo_servico/:id', async (req: Request, res: Response) => {
   try{
     const servico = await getTipo_servicoControllerById(req, res);
     if(servico === null) {
@@ -27,7 +27,7 @@ router.get('/tipo_servico/:tipo_servico_id', async (req: Request, res: Response)
   }
 });
 
-router.put('/tipo_servico/:tipo_servico_id', async (req: Request, res: Response) => {
+router.put('/tipo_servico/:id', async (req: Request, res: Response) => {
     try {
       const updateServico = await updateTipo_servicoControllerById(req, res);
       res.status(200).json(updateServico);
@@ -37,7 +37,7 @@ router.put('/tipo_servico/:tipo_servico_id', async (req: Request, res: Response)
     }
   });
 
-router.delete('/tipo_servico/:tipo_servico_id', async (req: Request, res: Response) => {
+router.delete('/tipo_servico/:id', async (req: Request, res: Response) => {
     try {
       const result = await deleteCargoControllerById(req, res);
       res.status(200).json({ message: result });

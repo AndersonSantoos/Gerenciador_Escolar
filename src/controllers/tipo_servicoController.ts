@@ -27,9 +27,9 @@ export const criarTipo_servicoController = async (req: Request, res: Response) =
 };
 
 export const getTipo_servicoControllerById = async (req: Request, res: Response) => {
-    const { tipo_servico_id } = req.params;
+    const { id } = req.params;
     try {
-        const tipo_servico = await getTipo_servicoById(parseInt(tipo_servico_id, 10));
+        const tipo_servico = await getTipo_servicoById(parseInt(id, 10));
         if (!tipo_servico) {
             res.status(404).json({ message: 'Tipo de serviço não encontrado' });
         } else {
@@ -42,10 +42,10 @@ export const getTipo_servicoControllerById = async (req: Request, res: Response)
 };
 
 export const updateTipo_servicoControllerById = async (req: Request, res: Response) => {
-    const { tipo_servico_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const tipo_servicoAtualizado = await updateTipo_servicoById(parseInt(tipo_servico_id, 10), newData);
+        const tipo_servicoAtualizado = await updateTipo_servicoById(parseInt(id, 10), newData);
         res.status(200).json(tipo_servicoAtualizado);
     } catch (error) {
         console.error('Erro ao atualizar tipo de serviço por ID', error);
@@ -55,8 +55,8 @@ export const updateTipo_servicoControllerById = async (req: Request, res: Respon
 
 export const deleteCargoControllerById = async (req: Request, res: Response) => {
     try {
-        const { tipo_servico_id } = req.params;
-        const result = await deleteTipo_servicoById(parseInt(tipo_servico_id, 10));
+        const { id } = req.params;
+        const result = await deleteTipo_servicoById(parseInt(id, 10));
         return result;
     } catch (error) {
         console.error('Erro ao excluir tipo de serviço por ID', error);

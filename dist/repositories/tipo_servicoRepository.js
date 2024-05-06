@@ -15,22 +15,22 @@ const criarTipo_servico = async (servico_id, tipo) => {
     }
 };
 exports.criarTipo_servico = criarTipo_servico;
-const getTipo_servicoById = async (tipo_servico_id) => {
-    const tipo_servico = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
+const getTipo_servicoById = async (id) => {
+    const tipo_servico = await tipo_servicoModel_1.default.findByPk(id);
     if (!tipo_servico) {
         throw new Error('Tipo de serviço não encontrado.');
     }
     return tipo_servico;
 };
 exports.getTipo_servicoById = getTipo_servicoById;
-const updateTipo_servicoById = async (tipo_servico_id, newData) => {
+const updateTipo_servicoById = async (id, newData) => {
     try {
-        const tipo_servico = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
+        const tipo_servico = await tipo_servicoModel_1.default.findByPk(id);
         if (!tipo_servico) {
             throw new Error('Tipo de serviço não encontrado.');
         }
-        await tipo_servicoModel_1.default.update(newData, { where: { tipo_servico_id: tipo_servico_id } });
-        const tipo_servicoAtualizado = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
+        await tipo_servicoModel_1.default.update(newData, { where: { id: id } });
+        const tipo_servicoAtualizado = await tipo_servicoModel_1.default.findByPk(id);
         return tipo_servicoAtualizado;
     }
     catch (error) {
@@ -38,9 +38,9 @@ const updateTipo_servicoById = async (tipo_servico_id, newData) => {
     }
 };
 exports.updateTipo_servicoById = updateTipo_servicoById;
-const deleteTipo_servicoById = async (tipo_servico_id) => {
+const deleteTipo_servicoById = async (id) => {
     try {
-        const tipo_servico = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
+        const tipo_servico = await tipo_servicoModel_1.default.findByPk(id);
         if (!tipo_servico) {
             throw new Error('Tipo de serviço não encontrado.');
         }

@@ -8,31 +8,31 @@ export const criarInfoAdicionais = async (servico_id: number, descricao: string)
     }
 }
 
-export const getInfoAdicionaisById = async (informacoes_id: number) => {
-    const infoAdicionais = await informacoesAdicionais.findByPk(informacoes_id);
+export const getInfoAdicionaisById = async (id: number) => {
+    const infoAdicionais = await informacoesAdicionais.findByPk(id);
     if(!infoAdicionais) {
         throw new Error('Informações adicionais não encontradas.')
     }
     return infoAdicionais;
 }
 
-export const updateInfoAdicionaisById = async (informacoes_id: number, newData: Partial<informacoesAdicionais>) => {
+export const updateInfoAdicionaisById = async (id: number, newData: Partial<informacoesAdicionais>) => {
     try {
-        const infoAdicionais = await informacoesAdicionais.findByPk(informacoes_id);
+        const infoAdicionais = await informacoesAdicionais.findByPk(id);
         if(!infoAdicionais) {
             throw new Error('Informações adicionais não encontradas.');
         }
-        await informacoesAdicionais.update(newData, { where: {informacoes_id: informacoes_id}});
-        const infoAtualizadas = await informacoesAdicionais.findByPk(informacoes_id);
+        await informacoesAdicionais.update(newData, { where: {id: id}});
+        const infoAtualizadas = await informacoesAdicionais.findByPk(id);
         return infoAtualizadas;
     } catch ( error ) {
         throw new Error('Erro na atualização das informações atualizadas por ID.')
     }
 }
 
-export const deleteInfoAdicionaisById = async (informacoes_id: number) => {
+export const deleteInfoAdicionaisById = async (id: number) => {
     try {
-        const infoAdicionais = await informacoesAdicionais.findByPk(informacoes_id);
+        const infoAdicionais = await informacoesAdicionais.findByPk(id);
         if(!infoAdicionais) {
             throw new Error('Informações não encontradas.')
         }

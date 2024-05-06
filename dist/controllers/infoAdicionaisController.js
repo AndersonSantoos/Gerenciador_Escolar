@@ -15,9 +15,9 @@ const criarInfoAdicionaisController = async (req, res) => {
 };
 exports.criarInfoAdicionaisController = criarInfoAdicionaisController;
 const getInfoAdicionaisControllerById = async (req, res) => {
-    const { informacoes_id } = req.params;
+    const { id } = req.params;
     try {
-        const infoAdicionais = await (0, infoAdicionaisRepository_1.getInfoAdicionaisById)(parseInt(informacoes_id, 10));
+        const infoAdicionais = await (0, infoAdicionaisRepository_1.getInfoAdicionaisById)(parseInt(id, 10));
         if (!infoAdicionais) {
             res.status(404).json({ message: 'Informações não encontradas.' });
         }
@@ -32,10 +32,10 @@ const getInfoAdicionaisControllerById = async (req, res) => {
 };
 exports.getInfoAdicionaisControllerById = getInfoAdicionaisControllerById;
 const updateInfoAdicionaisControllerById = async (req, res) => {
-    const { informacoes_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const infoAtualizadas = await (0, infoAdicionaisRepository_1.updateInfoAdicionaisById)(parseInt(informacoes_id, 10), newData);
+        const infoAtualizadas = await (0, infoAdicionaisRepository_1.updateInfoAdicionaisById)(parseInt(id, 10), newData);
         res.status(200).json(infoAtualizadas);
     }
     catch (error) {
@@ -46,8 +46,8 @@ const updateInfoAdicionaisControllerById = async (req, res) => {
 exports.updateInfoAdicionaisControllerById = updateInfoAdicionaisControllerById;
 const deleteInfoAdicionaisControllerById = async (req, res) => {
     try {
-        const { informacoes_id } = req.params;
-        const result = await (0, infoAdicionaisRepository_1.deleteInfoAdicionaisById)(parseInt(informacoes_id, 10));
+        const { id } = req.params;
+        const result = await (0, infoAdicionaisRepository_1.deleteInfoAdicionaisById)(parseInt(id, 10));
         return result;
     }
     catch (error) {

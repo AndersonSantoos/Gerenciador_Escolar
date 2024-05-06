@@ -14,7 +14,7 @@ router.post('/registrarFuncionario', async (req: Request, res: Response) => {
     }
 }); 
 
-router.get('/funcionario/:funcionario_id', async (req: Request, res: Response) => {
+router.get('/funcionario/:id', async (req: Request, res: Response) => {
   try{
     const funcionario = await getFuncionarioControllerById(req, res);
     if(funcionario === null) {
@@ -27,9 +27,7 @@ router.get('/funcionario/:funcionario_id', async (req: Request, res: Response) =
   }
 });
 
-
-
-  router.put('/funcionario/:funcionario_id', async (req: Request, res: Response) => {
+router.put('/funcionario/:id', async (req: Request, res: Response) => {
     try {
       const updateFuncionario = await updateFuncionarioControllerById(req, res);
       res.status(200).json(updateFuncionario);
@@ -39,7 +37,7 @@ router.get('/funcionario/:funcionario_id', async (req: Request, res: Response) =
     }
   });
 
-  router.delete('/funcionario/:funcionario_id', async (req: Request, res: Response) => {
+router.delete('/funcionario/:id', async (req: Request, res: Response) => {
     try {
       const result = await deleteFuncionarioByIdController(req, res);
       res.status(200).json({ message: result });

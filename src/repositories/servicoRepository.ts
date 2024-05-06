@@ -26,31 +26,31 @@ export const criarServico = async (
     }
 }
 
-export const getServicoById = async (servico_id: number) => {
+export const getServicoById = async (id: number) => {
     try {
-        const servico = await Servico.findByPk(servico_id);
+        const servico = await Servico.findByPk(id);
         return servico;
     } catch ( error ) {
         throw new Error('Erro enquanto busca servico por ID.');
     }
 }
 
-export const updateServicoById = async (servico_id: number, newData: Partial<Servico>) => {
+export const updateServicoById = async (id: number, newData: Partial<Servico>) => {
     try {
-        const servico = await Servico.findByPk(servico_id);
+        const servico = await Servico.findByPk(id);
         if(!servico) {
             throw new Error('Serviço não encontrado.');
         }
-        await Servico.update(newData, { where: {servico_id: servico_id}});
+        await Servico.update(newData, { where: {id: id}});
         return servico;
     } catch ( error ) {
         throw new Error('Erro na atualização do serviço por ID.')
     }
 }
 
-export const deleteServicoById = async ( servico_id: number ) => {
+export const deleteServicoById = async ( id: number ) => {
     try {
-        const servico = await Servico.findByPk(servico_id);
+        const servico = await Servico.findByPk(id);
         if(!servico) {
             throw new Error('Serviço não encontrado.');
         }

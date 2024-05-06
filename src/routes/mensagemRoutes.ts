@@ -14,7 +14,7 @@ router.post('/registrarMensagem', async (req: Request, res: Response) =>{
     }
 });
 
-router.get('/mensagem/:mensagem_id', async (req: Request, res: Response) => {
+router.get('/mensagem/:id', async (req: Request, res: Response) => {
     try {
         const mensagem = await getMensagemControllerById(req, res);
         
@@ -29,7 +29,7 @@ router.get('/mensagem/:mensagem_id', async (req: Request, res: Response) => {
     }
 });
 
-router.put('/mensagem/:mensagem_id', async (req: Request, res: Response) => {
+router.put('/mensagem/:id', async (req: Request, res: Response) => {
   try {
       await updateMensagemControllerById(req, res); 
   } catch ( error ) {
@@ -38,7 +38,7 @@ router.put('/mensagem/:mensagem_id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/mensagem/:mensagem_id', async (req: Request, res: Response) => {
+router.delete('/mensagem/:id', async (req: Request, res: Response) => {
   try {
       const result = await deleteMensagemControllerById(req, res);
       res.status(200).json({ message: result });

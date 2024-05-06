@@ -29,9 +29,9 @@ const criarTipo_servicoController = async (req, res) => {
 };
 exports.criarTipo_servicoController = criarTipo_servicoController;
 const getTipo_servicoControllerById = async (req, res) => {
-    const { tipo_servico_id } = req.params;
+    const { id } = req.params;
     try {
-        const tipo_servico = await (0, tipo_servicoRepository_1.getTipo_servicoById)(parseInt(tipo_servico_id, 10));
+        const tipo_servico = await (0, tipo_servicoRepository_1.getTipo_servicoById)(parseInt(id, 10));
         if (!tipo_servico) {
             res.status(404).json({ message: 'Tipo de serviço não encontrado' });
         }
@@ -46,10 +46,10 @@ const getTipo_servicoControllerById = async (req, res) => {
 };
 exports.getTipo_servicoControllerById = getTipo_servicoControllerById;
 const updateTipo_servicoControllerById = async (req, res) => {
-    const { tipo_servico_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const tipo_servicoAtualizado = await (0, tipo_servicoRepository_1.updateTipo_servicoById)(parseInt(tipo_servico_id, 10), newData);
+        const tipo_servicoAtualizado = await (0, tipo_servicoRepository_1.updateTipo_servicoById)(parseInt(id, 10), newData);
         res.status(200).json(tipo_servicoAtualizado);
     }
     catch (error) {
@@ -60,8 +60,8 @@ const updateTipo_servicoControllerById = async (req, res) => {
 exports.updateTipo_servicoControllerById = updateTipo_servicoControllerById;
 const deleteCargoControllerById = async (req, res) => {
     try {
-        const { tipo_servico_id } = req.params;
-        const result = await (0, tipo_servicoRepository_1.deleteTipo_servicoById)(parseInt(tipo_servico_id, 10));
+        const { id } = req.params;
+        const result = await (0, tipo_servicoRepository_1.deleteTipo_servicoById)(parseInt(id, 10));
         return result;
     }
     catch (error) {

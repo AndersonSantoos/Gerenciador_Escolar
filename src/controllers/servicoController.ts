@@ -31,8 +31,8 @@ export const criarServicoController = async ( req: Request, res: Response ) => {
 
 export const getServicoControllerById = async ( req: Request, res: Response) => {
     try {
-        const { servico_id } = req.params;
-        const servico = await getServicoById(parseInt(servico_id, 10))
+        const { id } = req.params;
+        const servico = await getServicoById(parseInt(id, 10))
         if(!servico) {
             return res.status(404).send('Serviço não encontrado.');
         }
@@ -45,9 +45,9 @@ export const getServicoControllerById = async ( req: Request, res: Response) => 
 
 export const updateServicoControllerById = async (req: Request, res: Response) => {
     try {
-        const { servico_id } = req.params;
+        const { id } = req.params;
         const newData = req.body;
-        const updateServico = await updateServicoById(parseInt(servico_id, 10), newData);
+        const updateServico = await updateServicoById(parseInt(id, 10), newData);
         res.status(200).json(updateServico);
         } catch ( error ) {
             console.error('Erro ao atualizar o serviço', error);
@@ -57,8 +57,8 @@ export const updateServicoControllerById = async (req: Request, res: Response) =
 
 export const deleteServicoByIdController = async (req: Request, res: Response) => {
     try {
-      const { servico_id } = req.params;
-      const result = await deleteServicoById(parseInt(servico_id, 10));
+      const { id } = req.params;
+      const result = await deleteServicoById(parseInt(id, 10));
       return result; 
     } catch (error) {
       console.error('Erro ao deletar serviço:', error);

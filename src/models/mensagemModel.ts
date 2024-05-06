@@ -3,14 +3,14 @@ import { sequelize } from '../database/dbConfig';
 import Servico from './servicoModel';
 
 class Mensagem extends Model {
-    public mensagem_id!: number;
+    public id!: number;
     public servico_id!: number;
     public descricao!: string;
 }
 
 Mensagem.init(
     {
-        mensagem_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -20,7 +20,7 @@ Mensagem.init(
             allowNull: false,
             references: {
                 model: Servico,
-                key: 'servico_id'
+                key: 'id'
             },
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',

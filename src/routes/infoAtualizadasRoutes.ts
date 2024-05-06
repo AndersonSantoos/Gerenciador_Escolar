@@ -14,7 +14,7 @@ router.post('/registrarInfo', async (req: Request, res: Response) =>{
     }
 });
 
-router.get('/info/:informacoes_id', async (req: Request, res: Response) => {
+router.get('/info/:id', async (req: Request, res: Response) => {
     try {
         const cargo = await getInfoAdicionaisControllerById(req, res);
         
@@ -29,7 +29,7 @@ router.get('/info/:informacoes_id', async (req: Request, res: Response) => {
     }
 });
 
-router.put('/info/:informacoes_id', async (req: Request, res: Response) => {
+router.put('/info/:id', async (req: Request, res: Response) => {
   try {
       await updateInfoAdicionaisControllerById(req, res); 
   } catch ( error ) {
@@ -38,7 +38,7 @@ router.put('/info/:informacoes_id', async (req: Request, res: Response) => {
   }
 });
 // NÃO VAI DELETAR PORQUE ESTÁ EM CASCATA COM A TABLE SERVIÇO
-router.delete('/info/:informacoes_id', async (req: Request, res: Response) => {
+router.delete('/info/:id', async (req: Request, res: Response) => {
   try {
       const result = await deleteInfoAdicionaisControllerById(req, res);
       res.status(200).json({ message: result });

@@ -14,7 +14,7 @@ router.post('/registrarCargo', async (req: Request, res: Response) =>{
     }
 });
 
-router.get('/cargo/:cargo_id', async (req: Request, res: Response) => {
+router.get('/cargo/id', async (req: Request, res: Response) => {
     try {
         const cargo = await getCargoControllerById(req, res);
         
@@ -29,7 +29,7 @@ router.get('/cargo/:cargo_id', async (req: Request, res: Response) => {
     }
 });
 
-router.put('/cargo/:cargo_id', async (req: Request, res: Response) => {
+router.put('/cargo/:id', async (req: Request, res: Response) => {
   try {
       await updateCargoControllerById(req, res); 
   } catch ( error ) {
@@ -38,7 +38,7 @@ router.put('/cargo/:cargo_id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/cargo/:cargo_id', async (req: Request, res: Response) => {
+router.delete('/cargo/:id', async (req: Request, res: Response) => {
   try {
       const result = await deleteCargoControllerById(req, res);
       res.status(200).json({ message: result });

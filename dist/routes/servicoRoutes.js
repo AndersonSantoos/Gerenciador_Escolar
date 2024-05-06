@@ -14,7 +14,7 @@ router.post('/registrarServico', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-router.get('/servico/:servico_id', async (req, res) => {
+router.get('/servico/:id', async (req, res) => {
     try {
         const servico = await (0, servicoController_1.getServicoControllerById)(req, res);
         if (servico === null) {
@@ -27,7 +27,7 @@ router.get('/servico/:servico_id', async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });
-router.put('/servico/:servico_id', async (req, res) => {
+router.put('/servico/:id', async (req, res) => {
     try {
         const updateServico = await (0, servicoController_1.updateServicoControllerById)(req, res);
         res.status(200).json(updateServico);
@@ -37,7 +37,7 @@ router.put('/servico/:servico_id', async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });
-router.delete('/servico/:servico_id', async (req, res) => {
+router.delete('/servico/:id', async (req, res) => {
     try {
         const result = await (0, servicoController_1.deleteServicoByIdController)(req, res);
         res.status(200).json({ message: result });

@@ -16,9 +16,9 @@ export const criarInfoAdicionaisController = async (req: Request, res: Response)
 };
 
 export const getInfoAdicionaisControllerById = async (req: Request, res: Response) => {
-    const { informacoes_id } = req.params;
+    const { id } = req.params;
     try {
-        const infoAdicionais = await getInfoAdicionaisById(parseInt(informacoes_id, 10));
+        const infoAdicionais = await getInfoAdicionaisById(parseInt(id, 10));
         if (!infoAdicionais) {
             res.status(404).json({ message: 'Informações não encontradas.' });
         } else {
@@ -31,10 +31,10 @@ export const getInfoAdicionaisControllerById = async (req: Request, res: Respons
 };
 
 export const updateInfoAdicionaisControllerById = async (req: Request, res: Response) => {
-    const { informacoes_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const infoAtualizadas = await updateInfoAdicionaisById(parseInt(informacoes_id, 10), newData);
+        const infoAtualizadas = await updateInfoAdicionaisById(parseInt(id, 10), newData);
         res.status(200).json(infoAtualizadas);
     } catch (error) {
         console.error('Erro ao atualizar informações por ID', error);
@@ -44,8 +44,8 @@ export const updateInfoAdicionaisControllerById = async (req: Request, res: Resp
 
 export const deleteInfoAdicionaisControllerById = async (req: Request, res: Response) => {
     try {
-        const { informacoes_id } = req.params;
-        const result = await deleteInfoAdicionaisById(parseInt(informacoes_id, 10));
+        const { id } = req.params;
+        const result = await deleteInfoAdicionaisById(parseInt(id, 10));
         return result;
     } catch (error) {
         console.error('Erro ao excluir informações atualizadas por ID', error);

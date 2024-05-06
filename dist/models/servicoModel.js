@@ -9,7 +9,7 @@ const funcionarioModel_1 = __importDefault(require("./funcionarioModel"));
 class Servico extends sequelize_1.Model {
 }
 Servico.init({
-    servico_id: {
+    id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -19,7 +19,7 @@ Servico.init({
         allowNull: false,
         references: {
             model: funcionarioModel_1.default,
-            key: 'funcionario_id'
+            key: 'id'
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

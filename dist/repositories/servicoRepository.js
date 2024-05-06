@@ -28,9 +28,9 @@ const criarServico = async (funcionario_id, titulo, status, prazo_resolucao) => 
     }
 };
 exports.criarServico = criarServico;
-const getServicoById = async (servico_id) => {
+const getServicoById = async (id) => {
     try {
-        const servico = await servicoModel_1.default.findByPk(servico_id);
+        const servico = await servicoModel_1.default.findByPk(id);
         return servico;
     }
     catch (error) {
@@ -38,13 +38,13 @@ const getServicoById = async (servico_id) => {
     }
 };
 exports.getServicoById = getServicoById;
-const updateServicoById = async (servico_id, newData) => {
+const updateServicoById = async (id, newData) => {
     try {
-        const servico = await servicoModel_1.default.findByPk(servico_id);
+        const servico = await servicoModel_1.default.findByPk(id);
         if (!servico) {
             throw new Error('Serviço não encontrado.');
         }
-        await servicoModel_1.default.update(newData, { where: { servico_id: servico_id } });
+        await servicoModel_1.default.update(newData, { where: { id: id } });
         return servico;
     }
     catch (error) {
@@ -52,9 +52,9 @@ const updateServicoById = async (servico_id, newData) => {
     }
 };
 exports.updateServicoById = updateServicoById;
-const deleteServicoById = async (servico_id) => {
+const deleteServicoById = async (id) => {
     try {
-        const servico = await servicoModel_1.default.findByPk(servico_id);
+        const servico = await servicoModel_1.default.findByPk(id);
         if (!servico) {
             throw new Error('Serviço não encontrado.');
         }

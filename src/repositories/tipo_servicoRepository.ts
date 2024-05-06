@@ -10,31 +10,31 @@ export const criarTipo_servico = async (servico_id: number, tipo: string) => {
     }
 }
 
-export const getTipo_servicoById = async (tipo_servico_id: number) => {
-    const tipo_servico = await Tipo_servico.findByPk(tipo_servico_id);
+export const getTipo_servicoById = async (id: number) => {
+    const tipo_servico = await Tipo_servico.findByPk(id);
     if(!tipo_servico) {
         throw new Error('Tipo de serviço não encontrado.')
     }
     return tipo_servico;
 }
 
-export const updateTipo_servicoById = async (tipo_servico_id: number, newData: Partial<Tipo_servico>) => {
+export const updateTipo_servicoById = async (id: number, newData: Partial<Tipo_servico>) => {
     try {
-        const tipo_servico = await Tipo_servico.findByPk(tipo_servico_id);
+        const tipo_servico = await Tipo_servico.findByPk(id);
         if(!tipo_servico) {
             throw new Error('Tipo de serviço não encontrado.')
         }
-        await Tipo_servico.update(newData, { where: {tipo_servico_id: tipo_servico_id}});
-        const tipo_servicoAtualizado = await Tipo_servico.findByPk(tipo_servico_id);
+        await Tipo_servico.update(newData, { where: {id: id}});
+        const tipo_servicoAtualizado = await Tipo_servico.findByPk(id);
         return tipo_servicoAtualizado;
     } catch ( error ) {
         throw new Error('Erro na atualização do tipo de serviço por ID.')
     }
 }
 
-export const deleteTipo_servicoById = async (tipo_servico_id: number) => {
+export const deleteTipo_servicoById = async (id: number) => {
     try {
-        const tipo_servico = await Tipo_servico.findByPk(tipo_servico_id);
+        const tipo_servico = await Tipo_servico.findByPk(id);
         if(!tipo_servico) {
             throw new Error('Tipo de serviço não encontrado.')
         }

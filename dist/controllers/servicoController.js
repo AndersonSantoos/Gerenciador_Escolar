@@ -31,8 +31,8 @@ const criarServicoController = async (req, res) => {
 exports.criarServicoController = criarServicoController;
 const getServicoControllerById = async (req, res) => {
     try {
-        const { servico_id } = req.params;
-        const servico = await (0, servicoRepository_1.getServicoById)(parseInt(servico_id, 10));
+        const { id } = req.params;
+        const servico = await (0, servicoRepository_1.getServicoById)(parseInt(id, 10));
         if (!servico) {
             return res.status(404).send('Serviço não encontrado.');
         }
@@ -46,9 +46,9 @@ const getServicoControllerById = async (req, res) => {
 exports.getServicoControllerById = getServicoControllerById;
 const updateServicoControllerById = async (req, res) => {
     try {
-        const { servico_id } = req.params;
+        const { id } = req.params;
         const newData = req.body;
-        const updateServico = await (0, servicoRepository_1.updateServicoById)(parseInt(servico_id, 10), newData);
+        const updateServico = await (0, servicoRepository_1.updateServicoById)(parseInt(id, 10), newData);
         res.status(200).json(updateServico);
     }
     catch (error) {
@@ -59,8 +59,8 @@ const updateServicoControllerById = async (req, res) => {
 exports.updateServicoControllerById = updateServicoControllerById;
 const deleteServicoByIdController = async (req, res) => {
     try {
-        const { servico_id } = req.params;
-        const result = await (0, servicoRepository_1.deleteServicoById)(parseInt(servico_id, 10));
+        const { id } = req.params;
+        const result = await (0, servicoRepository_1.deleteServicoById)(parseInt(id, 10));
         return result;
     }
     catch (error) {

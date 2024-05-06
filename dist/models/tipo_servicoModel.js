@@ -9,7 +9,7 @@ const servicoModel_1 = __importDefault(require("./servicoModel"));
 class Tipo_servico extends sequelize_1.Model {
 }
 Tipo_servico.init({
-    tipo_servico_id: {
+    id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,

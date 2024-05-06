@@ -9,7 +9,7 @@ const servicoModel_1 = __importDefault(require("./servicoModel"));
 class informacoesAdicionais extends sequelize_1.Model {
 }
 informacoesAdicionais.init({
-    informacoes_id: {
+    id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -19,7 +19,7 @@ informacoesAdicionais.init({
         allowNull: false,
         references: {
             model: servicoModel_1.default,
-            key: 'servico_id'
+            key: 'id'
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

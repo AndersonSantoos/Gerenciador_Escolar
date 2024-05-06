@@ -14,22 +14,22 @@ const criarInfoAdicionais = async (servico_id, descricao) => {
     }
 };
 exports.criarInfoAdicionais = criarInfoAdicionais;
-const getInfoAdicionaisById = async (informacoes_id) => {
-    const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(informacoes_id);
+const getInfoAdicionaisById = async (id) => {
+    const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(id);
     if (!infoAdicionais) {
         throw new Error('Informações adicionais não encontradas.');
     }
     return infoAdicionais;
 };
 exports.getInfoAdicionaisById = getInfoAdicionaisById;
-const updateInfoAdicionaisById = async (informacoes_id, newData) => {
+const updateInfoAdicionaisById = async (id, newData) => {
     try {
-        const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(informacoes_id);
+        const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(id);
         if (!infoAdicionais) {
             throw new Error('Informações adicionais não encontradas.');
         }
-        await informacoesAdicionaisModel_1.default.update(newData, { where: { informacoes_id: informacoes_id } });
-        const infoAtualizadas = await informacoesAdicionaisModel_1.default.findByPk(informacoes_id);
+        await informacoesAdicionaisModel_1.default.update(newData, { where: { id: id } });
+        const infoAtualizadas = await informacoesAdicionaisModel_1.default.findByPk(id);
         return infoAtualizadas;
     }
     catch (error) {
@@ -37,9 +37,9 @@ const updateInfoAdicionaisById = async (informacoes_id, newData) => {
     }
 };
 exports.updateInfoAdicionaisById = updateInfoAdicionaisById;
-const deleteInfoAdicionaisById = async (informacoes_id) => {
+const deleteInfoAdicionaisById = async (id) => {
     try {
-        const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(informacoes_id);
+        const infoAdicionais = await informacoesAdicionaisModel_1.default.findByPk(id);
         if (!infoAdicionais) {
             throw new Error('Informações não encontradas.');
         }

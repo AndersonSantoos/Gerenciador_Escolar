@@ -3,7 +3,7 @@ import { sequelize } from '../database/dbConfig';
 import Funcionario from './funcionarioModel';
 
 class Servico extends Model {
-    public servico_id!: number;
+    public id!: number;
     public funcionario_id!: number;
     public titulo!: string;
     public status!: string;
@@ -12,7 +12,7 @@ class Servico extends Model {
 
 Servico.init(
     {
-        servico_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -22,7 +22,7 @@ Servico.init(
             allowNull: false,
             references: {
                 model: Funcionario,
-                key: 'funcionario_id'
+                key: 'id'
             },
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',

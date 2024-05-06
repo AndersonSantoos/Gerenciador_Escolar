@@ -14,7 +14,7 @@ router.post('/registrarInfo', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-router.get('/info/:informacoes_id', async (req, res) => {
+router.get('/info/:id', async (req, res) => {
     try {
         const cargo = await (0, infoAdicionaisController_1.getInfoAdicionaisControllerById)(req, res);
         if (cargo === null) {
@@ -27,7 +27,7 @@ router.get('/info/:informacoes_id', async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });
-router.put('/info/:informacoes_id', async (req, res) => {
+router.put('/info/:id', async (req, res) => {
     try {
         await (0, infoAdicionaisController_1.updateInfoAdicionaisControllerById)(req, res);
     }
@@ -37,7 +37,7 @@ router.put('/info/:informacoes_id', async (req, res) => {
     }
 });
 // NÃO VAI DELETAR PORQUE ESTÁ EM CASCATA COM A TABLE SERVIÇO
-router.delete('/info/:informacoes_id', async (req, res) => {
+router.delete('/info/:id', async (req, res) => {
     try {
         const result = await (0, infoAdicionaisController_1.deleteInfoAdicionaisControllerById)(req, res);
         res.status(200).json({ message: result });

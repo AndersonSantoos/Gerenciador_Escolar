@@ -14,7 +14,7 @@ router.post('/registrarCargo', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-router.get('/cargo/:cargo_id', async (req, res) => {
+router.get('/cargo/id', async (req, res) => {
     try {
         const cargo = await (0, cargoController_1.getCargoControllerById)(req, res);
         if (cargo === null) {
@@ -27,7 +27,7 @@ router.get('/cargo/:cargo_id', async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });
-router.put('/cargo/:cargo_id', async (req, res) => {
+router.put('/cargo/:id', async (req, res) => {
     try {
         await (0, cargoController_1.updateCargoControllerById)(req, res);
     }
@@ -36,7 +36,7 @@ router.put('/cargo/:cargo_id', async (req, res) => {
         res.status(500).json({ message: 'Erro interno do servidor.' });
     }
 });
-router.delete('/cargo/:cargo_id', async (req, res) => {
+router.delete('/cargo/:id', async (req, res) => {
     try {
         const result = await (0, cargoController_1.deleteCargoControllerById)(req, res);
         res.status(200).json({ message: result });

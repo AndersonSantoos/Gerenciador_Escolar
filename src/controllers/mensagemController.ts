@@ -16,9 +16,9 @@ export const criarMensagemController = async (req: Request, res: Response) => {
 };
 
 export const getMensagemControllerById = async (req: Request, res: Response) => {
-    const { mensagem_id } = req.params;
+    const { id } = req.params;
     try {
-        const mensagem = await getMensagemById(parseInt(mensagem_id, 10));
+        const mensagem = await getMensagemById(parseInt(id, 10));
         if (!mensagem) {
             res.status(404).json({ message: 'Mensagem não encontrada' });
         } else {
@@ -31,10 +31,10 @@ export const getMensagemControllerById = async (req: Request, res: Response) => 
 };
 
 export const updateMensagemControllerById = async (req: Request, res: Response) => {
-    const { mensagem_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const mensagemAtualizada = await updateMensagemById(parseInt(mensagem_id, 10), newData);
+        const mensagemAtualizada = await updateMensagemById(parseInt(id, 10), newData);
         res.status(200).json(mensagemAtualizada);
     } catch (error) {
         console.error('Erro ao atualizar mensagem por ID', error);
@@ -44,8 +44,8 @@ export const updateMensagemControllerById = async (req: Request, res: Response) 
 
 export const deleteMensagemControllerById = async (req: Request, res: Response) => {
     try {
-        const { mensagem_id } = req.params;
-        const result = await deleteMensagemById(parseInt(mensagem_id, 10));
+        const { id } = req.params;
+        const result = await deleteMensagemById(parseInt(id, 10));
         return result;
     } catch (error) {
         console.error('Erro ao excluir mensagem por ID', error);

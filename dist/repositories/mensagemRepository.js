@@ -15,22 +15,22 @@ const criarMensagem = async (servico_id, descricao) => {
     }
 };
 exports.criarMensagem = criarMensagem;
-const getMensagemById = async (mensagem_id) => {
-    const mensagem = await mensagemModel_1.default.findByPk(mensagem_id);
+const getMensagemById = async (id) => {
+    const mensagem = await mensagemModel_1.default.findByPk(id);
     if (!mensagem) {
         throw new Error('Mensagem não encontrada.');
     }
     return mensagem;
 };
 exports.getMensagemById = getMensagemById;
-const updateMensagemById = async (mensagem_id, newData) => {
+const updateMensagemById = async (id, newData) => {
     try {
-        const mensagem = await mensagemModel_1.default.findByPk(mensagem_id);
+        const mensagem = await mensagemModel_1.default.findByPk(id);
         if (!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }
-        await mensagemModel_1.default.update(newData, { where: { mensagem_id: mensagem_id } });
-        const mensagemAtualizada = await mensagemModel_1.default.findByPk(mensagem_id);
+        await mensagemModel_1.default.update(newData, { where: { id: id } });
+        const mensagemAtualizada = await mensagemModel_1.default.findByPk(id);
         return mensagemAtualizada;
     }
     catch (error) {
@@ -38,9 +38,9 @@ const updateMensagemById = async (mensagem_id, newData) => {
     }
 };
 exports.updateMensagemById = updateMensagemById;
-const deleteMensagemById = async (mensagem_id) => {
+const deleteMensagemById = async (id) => {
     try {
-        const mensagem = await mensagemModel_1.default.findByPk(mensagem_id);
+        const mensagem = await mensagemModel_1.default.findByPk(id);
         if (!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }

@@ -9,10 +9,8 @@ import infoAtualizadasRoutes from './routes/infoAtualizadasRoutes';
 import mensagemRoutes from './routes/mensagemRoutes';
 import filialRoutes from './routes/filialRoutes';
 
-
 const app = express();
 const port = process.env.PORT || 3000;
-
 
 app.use(bodyParser.json());
 //Routes
