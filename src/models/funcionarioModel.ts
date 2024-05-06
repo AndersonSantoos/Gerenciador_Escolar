@@ -1,9 +1,10 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
 import Cargo from './cargoModel';
+import Filial from './filial'
 
 class Funcionario extends Model {
-    public funcionario_id!: number;
+    public id!: number;
     public cargo_id!: number;
     public nome!: string;
     public senha!: string;
@@ -14,7 +15,7 @@ class Funcionario extends Model {
 
 Funcionario.init(
     {
-        funcionario_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -23,8 +24,8 @@ Funcionario.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Cargo',
-                key: 'cargo_id',
+                model: Cargo,
+                key: 'id',
             }
         }, 
         nome: {
@@ -42,7 +43,7 @@ Funcionario.init(
             },
         },
         status: {
-            type: DataTypes.ENUM('ativo', 'inativo'),
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             validate: {
                 notEmpty: { msg: 'Campo não pode estar vazio' }
@@ -56,12 +57,13 @@ Funcionario.init(
             }
         }, 
         filial: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notEmpty: { msg: 'Campo não pode estar vazio' }
+            references: {
+                model: Filial,
+                key: 'id',
             }
-        } 
+        }, 
     }, {
         sequelize,
         tableName: 'Funcionarios'

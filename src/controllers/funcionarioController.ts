@@ -6,9 +6,7 @@ import {criarFuncionario,
         getFuncionarioById,
         updateFuncionarioById,
         deleteFuncionarioById } from "../repositories/funcionarioRepository";
-
-
-        
+  
 export const criarFuncionarioController = async ( req: Request, res: Response ) => {
     try {
         const { cargo_id, nome, status, email, filial, senha, confirmSenha } = req.body;
@@ -38,8 +36,8 @@ export const criarFuncionarioController = async ( req: Request, res: Response ) 
 
 export const getFuncionarioControllerById = async ( req: Request, res: Response) => {
     try {
-        const { funcionario_id } = req.params;
-        const funcionario = await getFuncionarioById(parseInt(funcionario_id, 10))
+        const { id } = req.params;
+        const funcionario = await getFuncionarioById(parseInt(id, 10))
         if(!funcionario) {
             return res.status(404).send('Funcionário não encontrado.');
         }
@@ -52,9 +50,9 @@ export const getFuncionarioControllerById = async ( req: Request, res: Response)
 
 export const updateFuncionarioControllerById = async (req: Request, res: Response) => {
     try {
-        const { funcionario_id } = req.params;
+        const { id } = req.params;
         const newData = req.body;
-        const updateFuncionario = await updateFuncionarioById(parseInt(funcionario_id, 10), newData);
+        const updateFuncionario = await updateFuncionarioById(parseInt(id, 10), newData);
         res.status(200).json(updateFuncionario);
         } catch ( error ) {
             console.error('Erro ao atualizar o funcionário', error);
@@ -64,8 +62,8 @@ export const updateFuncionarioControllerById = async (req: Request, res: Respons
 
 export const deleteFuncionarioByIdController = async (req: Request, res: Response) => {
     try {
-      const { funcionario_id } = req.params;
-      const result = await deleteFuncionarioById(parseInt(funcionario_id, 10));
+      const { id } = req.params;
+      const result = await deleteFuncionarioById(parseInt(id, 10));
       return result; 
     } catch (error) {
       console.error('Erro ao deletar funcionário:', error);

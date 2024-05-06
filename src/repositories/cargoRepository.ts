@@ -1,39 +1,39 @@
 import Cargo from '../models/cargoModel';
 
-export const criarCargo = async (funcao: string, isLeader: boolean) => {
+export const criarCargo = async (funcao: string, isLeader: boolean, status: boolean) => {
     try {
-        return await Cargo.create({ funcao, isLeader})
+        return await Cargo.create({ funcao, isLeader, status})
     } catch ( error ) {
         console.error('Erro ao criar cargo');
         throw error;
     }
 }
 
-export const getCargoById = async (cargo_id: number) => {
-    const cargo = await Cargo.findByPk(cargo_id);
+export const getCargoById = async (id: number) => {
+    const cargo = await Cargo.findByPk(id);
     if (!cargo) {
         throw new Error('Cargo não encontrado.');
     }
     return cargo;
 };
 
-export const updateCargoById = async (cargo_id: number, newData: Partial<Cargo>) => {
+export const updateCargoById = async (id: number, newData: Partial<Cargo>) => {
     try {
-        const cargo = await Cargo.findByPk(cargo_id);
+        const cargo = await Cargo.findByPk(id);
         if(!cargo) {
             throw new Error('Cargo não encontrado.');
         }
-        await Cargo.update(newData, { where: {cargo_id: cargo_id}});
-        const cargoAtualizado = await Cargo.findByPk(cargo_id);
+        await Cargo.update(newData, { where: {id: id}});
+        const cargoAtualizado = await Cargo.findByPk(id);
         return cargoAtualizado; 
     } catch ( error ) {
         throw new Error('Erro na atualização do cargo por ID.')
     }
 }
 
-export const deleteCargoById = async (cargo_id: number) => { 
+export const deleteCargoById = async (id: number) => { 
     try {
-        const cargo = await Cargo.findByPk(cargo_id);
+        const cargo = await Cargo.findByPk(id);
         if (!cargo) {
             throw new Error('Cargo não encontrado.');
         }

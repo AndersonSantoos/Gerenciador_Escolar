@@ -6,10 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConfig_1 = require("../database/dbConfig");
 const cargoModel_1 = __importDefault(require("./cargoModel"));
+const filial_1 = __importDefault(require("./filial"));
 class Funcionario extends sequelize_1.Model {
 }
 Funcionario.init({
-    funcionario_id: {
+    id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -18,8 +19,8 @@ Funcionario.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Cargo',
-            key: 'cargo_id',
+            model: cargoModel_1.default,
+            key: 'id',
         }
     },
     nome: {
@@ -37,7 +38,7 @@ Funcionario.init({
         },
     },
     status: {
-        type: sequelize_1.DataTypes.ENUM('ativo', 'inativo'),
+        type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         validate: {
             notEmpty: { msg: 'Campo não pode estar vazio' }
@@ -51,12 +52,13 @@ Funcionario.init({
         }
     },
     filial: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Campo não pode estar vazio' }
+        references: {
+            model: filial_1.default,
+            key: 'id',
         }
-    }
+    },
 }, {
     sequelize: dbConfig_1.sequelize,
     tableName: 'Funcionarios'

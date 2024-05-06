@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCargoControllerById = exports.updateCargoControllerById = exports.getCargoControllerById = exports.criarCargoController = void 0;
 const cargoRepository_1 = require("../repositories/cargoRepository");
 const criarCargoController = async (req, res) => {
-    const { funcao, isLeader } = req.body;
+    const { funcao, isLeader, status } = req.body;
     try {
-        const novoCargo = await (0, cargoRepository_1.criarCargo)(funcao, isLeader);
+        const novoCargo = await (0, cargoRepository_1.criarCargo)(funcao, isLeader, status);
         res.status(201).json(novoCargo);
     }
     catch (error) {
@@ -15,9 +15,9 @@ const criarCargoController = async (req, res) => {
 };
 exports.criarCargoController = criarCargoController;
 const getCargoControllerById = async (req, res) => {
-    const { cargo_id } = req.params;
+    const { id } = req.params;
     try {
-        const cargo = await (0, cargoRepository_1.getCargoById)(parseInt(cargo_id, 10));
+        const cargo = await (0, cargoRepository_1.getCargoById)(parseInt(id, 10));
         if (!cargo) {
             res.status(404).json({ message: 'Cargo não encontrado' });
         }
@@ -32,10 +32,10 @@ const getCargoControllerById = async (req, res) => {
 };
 exports.getCargoControllerById = getCargoControllerById;
 const updateCargoControllerById = async (req, res) => {
-    const { cargo_id } = req.params;
+    const { id } = req.params;
     const newData = req.body;
     try {
-        const cargoAtualizado = await (0, cargoRepository_1.updateCargoById)(parseInt(cargo_id, 10), newData);
+        const cargoAtualizado = await (0, cargoRepository_1.updateCargoById)(parseInt(id, 10), newData);
         res.status(200).json(cargoAtualizado);
     }
     catch (error) {
@@ -46,8 +46,8 @@ const updateCargoControllerById = async (req, res) => {
 exports.updateCargoControllerById = updateCargoControllerById;
 const deleteCargoControllerById = async (req, res) => {
     try {
-        const { cargo_id } = req.params;
-        const result = await (0, cargoRepository_1.deleteCargoById)(parseInt(cargo_id, 10));
+        const { id } = req.params;
+        const result = await (0, cargoRepository_1.deleteCargoById)(parseInt(id, 10));
         return result;
     }
     catch (error) {

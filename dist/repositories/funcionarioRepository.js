@@ -5,16 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteFuncionarioById = exports.updateFuncionarioById = exports.getFuncionarioById = exports.criarFuncionario = void 0;
 const funcionarioModel_1 = __importDefault(require("../models/funcionarioModel"));
-var StatusFuncionario;
-(function (StatusFuncionario) {
-    StatusFuncionario["Ativo"] = "Ativo";
-    StatusFuncionario["Inativo"] = "Inativo";
-})(StatusFuncionario || (StatusFuncionario = {}));
 const criarFuncionario = async (cargo_id, nome, status, email, filial, senha) => {
     try {
-        if (!(Object.values(StatusFuncionario).includes(status))) {
-            throw new Error('Status inválido');
-        }
         return await funcionarioModel_1.default.create({ cargo_id, nome, status, email, filial, senha });
     }
     catch (error) {
@@ -23,9 +15,9 @@ const criarFuncionario = async (cargo_id, nome, status, email, filial, senha) =>
     }
 };
 exports.criarFuncionario = criarFuncionario;
-const getFuncionarioById = async (funcionario_id) => {
+const getFuncionarioById = async (id) => {
     try {
-        const funcionario = await funcionarioModel_1.default.findByPk(funcionario_id);
+        const funcionario = await funcionarioModel_1.default.findByPk(id);
         return funcionario;
     }
     catch (error) {
@@ -33,13 +25,13 @@ const getFuncionarioById = async (funcionario_id) => {
     }
 };
 exports.getFuncionarioById = getFuncionarioById;
-const updateFuncionarioById = async (funcionario_id, newData) => {
+const updateFuncionarioById = async (id, newData) => {
     try {
-        const funcionario = await funcionarioModel_1.default.findByPk(funcionario_id);
+        const funcionario = await funcionarioModel_1.default.findByPk(id);
         if (!funcionario) {
             throw new Error('Funcionário não encontrado.');
         }
-        await funcionarioModel_1.default.update(newData, { where: { funcionario_id: funcionario_id } });
+        await funcionarioModel_1.default.update(newData, { where: { id: id } });
         return funcionario;
     }
     catch (error) {
@@ -47,9 +39,9 @@ const updateFuncionarioById = async (funcionario_id, newData) => {
     }
 };
 exports.updateFuncionarioById = updateFuncionarioById;
-const deleteFuncionarioById = async (funcionario_id) => {
+const deleteFuncionarioById = async (id) => {
     try {
-        const funcionario = await funcionarioModel_1.default.findByPk(funcionario_id);
+        const funcionario = await funcionarioModel_1.default.findByPk(id);
         if (!funcionario) {
             throw new Error('Funcionário não encontrado.');
         }

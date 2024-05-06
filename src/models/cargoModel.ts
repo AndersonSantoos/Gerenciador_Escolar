@@ -2,14 +2,15 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
 
 class Cargo extends Model {
-    public cargo_id!: number;
+    public id!: number;
     public funcao!: string;
     public isLeader!: boolean;
+    public status!: boolean;
 }
 
 Cargo.init(
     {
-        cargo_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -26,6 +27,13 @@ Cargo.init(
             allowNull: false,
             validate: {
                 notEmpty: { msg: 'Campo não pode estar vazio' }
+            }
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            validate: {
+                notEmpty: { msg: 'Campo não pode estar vazio.'}
             }
         }
     }, {

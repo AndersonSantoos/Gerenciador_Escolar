@@ -29,7 +29,7 @@ Anexo.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Mensagem',
+            model: mensagemModel_1.default,
             key: 'mensagem_id'
         },
         onDelete: 'CASCADE',

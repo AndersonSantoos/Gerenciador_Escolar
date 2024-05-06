@@ -30,7 +30,7 @@ Anexo.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Mensagem',
+                model: Mensagem,
                 key: 'mensagem_id'
             },
             onDelete: 'CASCADE',

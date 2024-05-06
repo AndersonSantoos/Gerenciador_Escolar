@@ -37,8 +37,8 @@ const criarFuncionarioController = async (req, res) => {
 exports.criarFuncionarioController = criarFuncionarioController;
 const getFuncionarioControllerById = async (req, res) => {
     try {
-        const { funcionario_id } = req.params;
-        const funcionario = await (0, funcionarioRepository_1.getFuncionarioById)(parseInt(funcionario_id, 10));
+        const { id } = req.params;
+        const funcionario = await (0, funcionarioRepository_1.getFuncionarioById)(parseInt(id, 10));
         if (!funcionario) {
             return res.status(404).send('Funcionário não encontrado.');
         }
@@ -52,9 +52,9 @@ const getFuncionarioControllerById = async (req, res) => {
 exports.getFuncionarioControllerById = getFuncionarioControllerById;
 const updateFuncionarioControllerById = async (req, res) => {
     try {
-        const { funcionario_id } = req.params;
+        const { id } = req.params;
         const newData = req.body;
-        const updateFuncionario = await (0, funcionarioRepository_1.updateFuncionarioById)(parseInt(funcionario_id, 10), newData);
+        const updateFuncionario = await (0, funcionarioRepository_1.updateFuncionarioById)(parseInt(id, 10), newData);
         res.status(200).json(updateFuncionario);
     }
     catch (error) {
@@ -65,8 +65,8 @@ const updateFuncionarioControllerById = async (req, res) => {
 exports.updateFuncionarioControllerById = updateFuncionarioControllerById;
 const deleteFuncionarioByIdController = async (req, res) => {
     try {
-        const { funcionario_id } = req.params;
-        const result = await (0, funcionarioRepository_1.deleteFuncionarioById)(parseInt(funcionario_id, 10));
+        const { id } = req.params;
+        const result = await (0, funcionarioRepository_1.deleteFuncionarioById)(parseInt(id, 10));
         return result;
     }
     catch (error) {
