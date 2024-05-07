@@ -35,5 +35,5 @@ informacoesAdicionais.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'info_adicionais'
 });
-informacoesAdicionais.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' });
+informacoesAdicionais.belongsTo(servicoModel_1.default, { foreignKey: 'id', as: 'servico' });
 exports.default = informacoesAdicionais;

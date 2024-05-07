@@ -49,5 +49,5 @@ Servico.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'Servico'
 });
-Servico.belongsTo(funcionarioModel_1.default, { foreignKey: 'funcionario_id', as: 'funcionario' });
+Servico.belongsTo(funcionarioModel_1.default, { foreignKey: 'id', as: 'funcionario' });
 exports.default = Servico;

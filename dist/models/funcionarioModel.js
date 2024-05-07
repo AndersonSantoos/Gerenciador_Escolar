@@ -23,6 +23,14 @@ Funcionario.init({
             key: 'id',
         }
     },
+    filial_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: filial_1.default,
+            key: 'id',
+        }
+    },
     nome: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
@@ -51,17 +59,10 @@ Funcionario.init({
             notEmpty: { msg: 'Campo não pode estar vazio' }
         }
     },
-    filial: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: filial_1.default,
-            key: 'id',
-        }
-    },
 }, {
     sequelize: dbConfig_1.sequelize,
     tableName: 'Funcionarios'
 });
 Funcionario.belongsTo(cargoModel_1.default, { foreignKey: 'cargo_id', as: 'cargo' });
+Funcionario.belongsTo(filial_1.default, { foreignKey: 'filial_id', as: 'filial' });
 exports.default = Funcionario;

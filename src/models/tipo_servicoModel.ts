@@ -20,7 +20,7 @@ Tipo_servico.init(
             allowNull: false,
             references: {
                 model: Servico,
-                key: 'servico_id'
+                key: 'id'
             },
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
@@ -37,6 +37,6 @@ Tipo_servico.init(
         tableName: 'tipo_servico'
 });
 
-Tipo_servico.belongsTo(Servico, { foreignKey: 'servico_id', as: 'servico'});
+Tipo_servico.belongsTo(Servico, { foreignKey: 'id', as: 'servico'});
 
 export default Tipo_servico;

@@ -37,6 +37,6 @@ informacoesAdicionais.init(
         tableName: 'info_adicionais'
 });
 
-informacoesAdicionais.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'});
+informacoesAdicionais.belongsTo(Servico, {foreignKey: 'id', as: 'servico'});
 
 export default informacoesAdicionais;

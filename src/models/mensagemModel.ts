@@ -37,6 +37,6 @@ Mensagem.init(
         tableName: 'Mensagem'
 });
 
-Mensagem.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'});
+Mensagem.belongsTo(Servico, {foreignKey: 'id', as: 'servico'});
 
 export default Mensagem;

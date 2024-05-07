@@ -19,7 +19,7 @@ Tipo_servico.init({
         allowNull: false,
         references: {
             model: servicoModel_1.default,
-            key: 'servico_id'
+            key: 'id'
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
@@ -35,5 +35,5 @@ Tipo_servico.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'tipo_servico'
 });
-Tipo_servico.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' });
+Tipo_servico.belongsTo(servicoModel_1.default, { foreignKey: 'id', as: 'servico' });
 exports.default = Tipo_servico;

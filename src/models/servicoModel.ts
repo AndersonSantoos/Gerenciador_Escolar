@@ -55,6 +55,6 @@ Servico.init(
         tableName: 'Servico'
 });
 
-Servico.belongsTo(Funcionario, { foreignKey: 'funcionario_id', as: 'funcionario'});
+Servico.belongsTo(Funcionario, { foreignKey: 'id', as: 'funcionario'});
 
 export default Servico;
