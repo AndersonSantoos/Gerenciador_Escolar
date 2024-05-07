@@ -1,9 +1,10 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
+import { v4 as uuidv4 } from 'uuid';
 import Servico from './servicoModel';
 
 class Mensagem extends Model {
-    public id!: number;
+    public id!: string; // Alterando para string para UUID
     public servico_id!: number;
     public descricao!: string;
 }
@@ -11,8 +12,8 @@ class Mensagem extends Model {
 Mensagem.init(
     {
         id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+            type: DataTypes.UUID, // Mudança para DataTypes.UUID
+            defaultValue: () => uuidv4(), // Gerando UUID padrão
             primaryKey: true,
         },
         servico_id: {
@@ -37,6 +38,6 @@ Mensagem.init(
         tableName: 'Mensagem'
 });
 
-Mensagem.belongsTo(Servico, {foreignKey: 'id', as: 'servico'});
+Mensagem.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'}); // Corrigindo a chave estrangeira
 
 export default Mensagem;

@@ -9,6 +9,7 @@ import infoAtualizadasRoutes from './routes/infoAtualizadasRoutes';
 import mensagemRoutes from './routes/mensagemRoutes';
 import filialRoutes from './routes/filialRoutes';
 import setorResponsavelRoutes from './routes/setorResponsavelRoutes';
+import filialServicoRoutes from './routes/filialServicoRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ app.use('/', infoAtualizadasRoutes);
 app.use('/', mensagemRoutes);
 app.use('/', filialRoutes);
 app.use('/', setorResponsavelRoutes);
-
+app.use('/', filialServicoRoutes);
 
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta? ${port}`);

@@ -2,14 +2,14 @@ import Mensagem from '../models/mensagemModel';
 
 export const criarMensagem = async (servico_id: number, descricao: string) => {
     try {
-        return await Mensagem.create({ servico_id, descricao})
-    } catch ( error ) {
-        console.error('Erro ao criar cargo');
+        return await Mensagem.create({ servico_id, descricao })
+    } catch (error) {
+        console.error('Erro ao criar mensagem');
         throw error;
     }
 }
 
-export const getMensagemById = async (id: number) => {
+export const getMensagemById = async (id: string) => {
     const mensagem = await Mensagem.findByPk(id);
     if (!mensagem) {
         throw new Error('Mensagem não encontrada.');
@@ -17,21 +17,21 @@ export const getMensagemById = async (id: number) => {
     return mensagem;
 };
 
-export const updateMensagemById = async (id: number, newData: Partial<Mensagem>) => {
+export const updateMensagemById = async (id: string, newData: Partial<Mensagem>) => {
     try {
         const mensagem = await Mensagem.findByPk(id);
-        if(!mensagem) {
+        if (!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }
-        await Mensagem.update(newData, { where: {id: id}});
+        await Mensagem.update(newData, { where: { id } });
         const mensagemAtualizada = await Mensagem.findByPk(id);
-        return mensagemAtualizada; 
-    } catch ( error ) {
+        return mensagemAtualizada;
+    } catch (error) {
         throw new Error('Erro na atualização da mensagem por ID.')
     }
 }
 
-export const deleteMensagemById = async (id: number) => { 
+export const deleteMensagemById = async (id: string) => {
     try {
         const mensagem = await Mensagem.findByPk(id);
         if (!mensagem) {

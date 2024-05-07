@@ -10,7 +10,7 @@ const criarMensagem = async (servico_id, descricao) => {
         return await mensagemModel_1.default.create({ servico_id, descricao });
     }
     catch (error) {
-        console.error('Erro ao criar cargo');
+        console.error('Erro ao criar mensagem');
         throw error;
     }
 };
@@ -29,7 +29,7 @@ const updateMensagemById = async (id, newData) => {
         if (!mensagem) {
             throw new Error('Mensagem não encontrada.');
         }
-        await mensagemModel_1.default.update(newData, { where: { id: id } });
+        await mensagemModel_1.default.update(newData, { where: { id } });
         const mensagemAtualizada = await mensagemModel_1.default.findByPk(id);
         return mensagemAtualizada;
     }

@@ -28,7 +28,7 @@ Funcionario.init(
                 key: 'id',
             }
         },
-        filial_id: { // Alterado para evitar colisão de nomes
+        filial_id: { 
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

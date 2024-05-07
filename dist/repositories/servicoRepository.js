@@ -3,24 +3,53 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteServicoById = exports.updateServicoById = exports.getServicoById = exports.criarServico = void 0;
+exports.deleteServicoById = exports.updateServicoById = exports.getServicoById = exports.criarServico = exports.somarDataPretendidaComPrazo = void 0;
 const servicoModel_1 = __importDefault(require("../models/servicoModel"));
-var StatusServico;
-(function (StatusServico) {
-    StatusServico["Ativo"] = "Ativo";
-    StatusServico["Inativo"] = "Inativo";
-    StatusServico["EmAndamento"] = "Em andamento";
-    StatusServico["Concluido"] = "Conclu\u00EDdo";
-    StatusServico["Cancelado"] = "Cancelado";
-    StatusServico["Pendente"] = "Pendente";
-    StatusServico["EmEspera"] = "Em espera";
-})(StatusServico || (StatusServico = {}));
-const criarServico = async (funcionario_id, titulo, status, prazo_resolucao) => {
+const tipo_servicoModel_1 = __importDefault(require("../models/tipo_servicoModel"));
+// Função para calcular o prazo de resolução
+const calcularPrazoResolucao = async (tipo_servico_id) => {
+    const tipoServico = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
+    if (!tipoServico) {
+        throw new Error('Tipo de serviço não encontrado');
+    }
+    const prazoTipoServico = tipoServico.getDataValue('prazo');
+    const prazoMilissegundos = prazoTipoServico * 24 * 60 * 60 * 1000;
+    const dataAbertura = new Date();
+    return new Date(dataAbertura.getTime() + prazoMilissegundos);
+};
+const somarDataPretendidaComPrazo = async (servicoId, dataPretendida) => {
     try {
-        if (!(Object.values(StatusServico).includes(status))) {
-            throw new Error('Status inválido.');
+        const servico = await servicoModel_1.default.findByPk(servicoId);
+        if (!servico) {
+            throw new Error('Serviço não encontrado.');
         }
-        return await servicoModel_1.default.create({ funcionario_id, titulo, status, prazo_resolucao });
+        const tipoServico = await tipo_servicoModel_1.default.findByPk(servico.tipo_servico_id);
+        if (!tipoServico) {
+            throw new Error('Tipo de serviço não encontrado');
+        }
+        const prazoTipoServico = tipoServico.getDataValue('prazo');
+        const prazoMilissegundos = prazoTipoServico * 24 * 60 * 60 * 1000;
+        const dataPretendidaMilissegundos = dataPretendida.getTime();
+        const dataLimiteMilissegundos = servico.prazo_resolucao.getTime();
+        const novaDataMilissegundos = dataPretendidaMilissegundos + prazoMilissegundos;
+        if (novaDataMilissegundos <= dataLimiteMilissegundos) {
+            return new Date(novaDataMilissegundos);
+        }
+        else {
+            return null;
+        }
+    }
+    catch (error) {
+        console.error('Erro ao somar data pretendida com prazo:', error);
+        throw error;
+    }
+};
+exports.somarDataPretendidaComPrazo = somarDataPretendidaComPrazo;
+const criarServico = async (filial_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao) => {
+    try {
+        // Aqui você realiza o cálculo do prazo_resolucao antes de criar o serviço
+        const prazoResolucao = await calcularPrazoResolucao(tipo_servico_id);
+        return await servicoModel_1.default.create({ filial_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao });
     }
     catch (error) {
         console.error('Erro ao criar serviço', error);

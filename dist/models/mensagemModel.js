@@ -5,13 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConfig_1 = require("../database/dbConfig");
+const uuid_1 = require("uuid");
 const servicoModel_1 = __importDefault(require("./servicoModel"));
 class Mensagem extends sequelize_1.Model {
 }
 Mensagem.init({
     id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        autoIncrement: true,
+        type: sequelize_1.DataTypes.UUID, // Mudança para DataTypes.UUID
+        defaultValue: () => (0, uuid_1.v4)(), // Gerando UUID padrão
         primaryKey: true,
     },
     servico_id: {
@@ -35,5 +36,5 @@ Mensagem.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'Mensagem'
 });
-Mensagem.belongsTo(servicoModel_1.default, { foreignKey: 'id', as: 'servico' });
+Mensagem.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' }); // Corrigindo a chave estrangeira
 exports.default = Mensagem;

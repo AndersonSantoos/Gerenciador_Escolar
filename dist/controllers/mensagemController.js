@@ -17,7 +17,7 @@ exports.criarMensagemController = criarMensagemController;
 const getMensagemControllerById = async (req, res) => {
     const { id } = req.params;
     try {
-        const mensagem = await (0, mensagemRepository_1.getMensagemById)(parseInt(id, 10));
+        const mensagem = await (0, mensagemRepository_1.getMensagemById)(id);
         if (!mensagem) {
             res.status(404).json({ message: 'Mensagem não encontrada' });
         }
@@ -35,7 +35,7 @@ const updateMensagemControllerById = async (req, res) => {
     const { id } = req.params;
     const newData = req.body;
     try {
-        const mensagemAtualizada = await (0, mensagemRepository_1.updateMensagemById)(parseInt(id, 10), newData);
+        const mensagemAtualizada = await (0, mensagemRepository_1.updateMensagemById)(id, newData);
         res.status(200).json(mensagemAtualizada);
     }
     catch (error) {
@@ -47,8 +47,8 @@ exports.updateMensagemControllerById = updateMensagemControllerById;
 const deleteMensagemControllerById = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await (0, mensagemRepository_1.deleteMensagemById)(parseInt(id, 10));
-        return result;
+        await (0, mensagemRepository_1.deleteMensagemById)(id);
+        res.status(200).json({ message: 'Mensagem deletada com sucesso!' });
     }
     catch (error) {
         console.error('Erro ao excluir mensagem por ID', error);
