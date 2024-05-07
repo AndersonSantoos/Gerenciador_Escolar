@@ -13,6 +13,7 @@ const tipo_servicoRoutes_1 = __importDefault(require("./routes/tipo_servicoRoute
 const infoAtualizadasRoutes_1 = __importDefault(require("./routes/infoAtualizadasRoutes"));
 const mensagemRoutes_1 = __importDefault(require("./routes/mensagemRoutes"));
 const filialRoutes_1 = __importDefault(require("./routes/filialRoutes"));
+const setorResponsavelRoutes_1 = __importDefault(require("./routes/setorResponsavelRoutes"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(body_parser_1.default.json());
@@ -24,6 +25,7 @@ app.use('/', tipo_servicoRoutes_1.default);
 app.use('/', infoAtualizadasRoutes_1.default);
 app.use('/', mensagemRoutes_1.default);
 app.use('/', filialRoutes_1.default);
+app.use('/', setorResponsavelRoutes_1.default);
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta? ${port}`);
     try {

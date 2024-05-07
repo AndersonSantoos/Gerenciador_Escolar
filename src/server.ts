@@ -8,6 +8,7 @@ import tipo_servicoRoutes from './routes/tipo_servicoRoutes';
 import infoAtualizadasRoutes from './routes/infoAtualizadasRoutes';
 import mensagemRoutes from './routes/mensagemRoutes';
 import filialRoutes from './routes/filialRoutes';
+import setorResponsavelRoutes from './routes/setorResponsavelRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use('/', tipo_servicoRoutes);
 app.use('/', infoAtualizadasRoutes);
 app.use('/', mensagemRoutes);
 app.use('/', filialRoutes);
+app.use('/', setorResponsavelRoutes);
 
 
 app.listen(port, async () => {
