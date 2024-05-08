@@ -1,7 +1,7 @@
 import Servico from '../models/servicoModel';
 import TipoServico from '../models/tipo_servicoModel';
+import Funcionario from '../models/funcionarioModel';
 
-// Função para calcular o prazo de resolução
 const calcularPrazoResolucao = async (tipo_servico_id: number): Promise<Date> => {
     const tipoServico = await TipoServico.findByPk(tipo_servico_id);
     if (!tipoServico) {
@@ -43,7 +43,7 @@ export const somarDataPretendidaComPrazo = async (servicoId: number, dataPretend
 }
 
 export const criarServico = async (
-    filial_id: number,
+    filialServico_id: number,
     tipo_servico_id: number,
     funcionario_id: number,
     responsavel: string,
@@ -54,10 +54,9 @@ export const criarServico = async (
     data_finalizacao: Date | null
 ) => {
     try {
-        // Aqui você realiza o cálculo do prazo_resolucao antes de criar o serviço
         const prazoResolucao = await calcularPrazoResolucao(tipo_servico_id);
 
-        return await Servico.create({ filial_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao });
+        return await Servico.create({ filialServico_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao });
     } catch (error) {
         console.error('Erro ao criar serviço', error);
         throw error;
@@ -98,5 +97,3 @@ export const deleteServicoById = async (id: number) => {
         throw new Error('Erro enquanto deletava o serviço pelo ID.')
     }
 }
-
-

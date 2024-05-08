@@ -1,12 +1,12 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import { sequelize } from '../database/dbConfig';
 import Funcionario from './funcionarioModel';
-import Filial from './filial';
+import FilialServico from './filialServico';
 import Tipo_servico from "./tipo_servicoModel";
 
 class Servico extends Model {
     public id!: number;
-    public filial_id!: number;
+    public filialServico_id!: number;
     public tipo_servico_id!: number;
     public funcionario_id!: number;
     public responsavel!: string;
@@ -15,43 +15,6 @@ class Servico extends Model {
     public prazo_resolucao!: Date;
     public prazo_proposto!: Date | null;
     public data_finalizacao!: Date | null;
-
-    public async calcularPrazoResolucao(): Promise<Date> {
-        const dataAbertura = new Date();
-        const tipoServico = await Tipo_servico.findByPk(this.tipo_servico_id);
-        if (!tipoServico) {
-            throw new Error('Tipo de serviço não encontrado');
-        }
-        const prazoMinimo = tipoServico.getDataValue('prazo_minimo');
-        const prazoTipoServico = tipoServico.getDataValue('prazo');
-        const prazoMilissegundos = prazoTipoServico * 24 * 60 * 60 * 1000;
-
-        // Calcula o prazo mínimo
-        const dataPrazoMinimo = new Date(dataAbertura.getTime() + prazoMinimo * 24 * 60 * 60 * 1000);
-        if (dataAbertura > dataPrazoMinimo) {
-            throw new Error('Prazo mínimo não respeitado');
-        }
-
-        return new Date(dataAbertura.getTime() + prazoMilissegundos);
-    }
-
-    public async somarDataPretendidaComPrazo(dataPretendida: Date): Promise<Date | null> {
-        const tipoServico = await Tipo_servico.findByPk(this.tipo_servico_id);
-        if (!tipoServico) {
-            throw new Error('Tipo de serviço não encontrado');
-        }
-        const prazoTipoServico = tipoServico.getDataValue('prazo');
-        const prazoMilissegundos = prazoTipoServico * 24 * 60 * 60 * 1000;
-        const dataPretendidaMilissegundos = dataPretendida.getTime();
-        const dataLimiteMilissegundos = this.prazo_resolucao.getTime();
-        const novaDataMilissegundos = dataPretendidaMilissegundos + prazoMilissegundos;
-
-        if (novaDataMilissegundos <= dataLimiteMilissegundos) {
-            return new Date(novaDataMilissegundos);
-        } else {
-            return null;
-        }
-    }
 }
 
 Servico.init(
@@ -61,11 +24,11 @@ Servico.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        filial_id: { 
+        filialServico_id: { 
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Filial,
+                model: FilialServico,
                 key: 'id',
             }
         },
@@ -133,15 +96,9 @@ Servico.init(
         tableName: 'Servico',
         hooks: {
             beforeSave: async (servico: Servico) => {
-                if (servico.changed('tipo_servico_id')) {
-                    servico.prazo_resolucao = await servico.calcularPrazoResolucao();
-                }
+                // Aqui você pode adicionar lógica de pré-processamento antes de salvar o serviço, se necessário
             }
         }
 });
-
-Servico.belongsTo(Funcionario, { foreignKey: 'funcionario_id', as: 'funcionario'});
-Servico.belongsTo(Filial, { foreignKey: 'filial_id', as: 'filial'});
-Servico.belongsTo(Tipo_servico, { foreignKey: 'tipo_servico_id', as: 'tipo_servico'});
 
 export default Servico;

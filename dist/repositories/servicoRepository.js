@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteServicoById = exports.updateServicoById = exports.getServicoById = exports.criarServico = exports.somarDataPretendidaComPrazo = void 0;
 const servicoModel_1 = __importDefault(require("../models/servicoModel"));
 const tipo_servicoModel_1 = __importDefault(require("../models/tipo_servicoModel"));
-// Função para calcular o prazo de resolução
 const calcularPrazoResolucao = async (tipo_servico_id) => {
     const tipoServico = await tipo_servicoModel_1.default.findByPk(tipo_servico_id);
     if (!tipoServico) {
@@ -45,11 +44,10 @@ const somarDataPretendidaComPrazo = async (servicoId, dataPretendida) => {
     }
 };
 exports.somarDataPretendidaComPrazo = somarDataPretendidaComPrazo;
-const criarServico = async (filial_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao) => {
+const criarServico = async (filialServico_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao) => {
     try {
-        // Aqui você realiza o cálculo do prazo_resolucao antes de criar o serviço
         const prazoResolucao = await calcularPrazoResolucao(tipo_servico_id);
-        return await servicoModel_1.default.create({ filial_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao });
+        return await servicoModel_1.default.create({ filialServico_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao });
     }
     catch (error) {
         console.error('Erro ao criar serviço', error);

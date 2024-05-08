@@ -8,18 +8,17 @@ const funcionarioModel_1 = __importDefault(require("../models/funcionarioModel")
 const servicoRepository_1 = require("../repositories/servicoRepository");
 const criarServicoController = async (req, res) => {
     try {
-        const { funcionario_id, titulo, status, prazo_resolucao } = req.body;
-        if (!funcionario_id || !titulo || !status || !prazo_resolucao) {
+        const { filialServico_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao } = req.body;
+        if (!filialServico_id || !tipo_servico_id || !funcionario_id || !responsavel || !titulo || !status || !prazo_resolucao) {
             console.error('Todos os campos são necessários.');
             return res.status(400).send('Todos os campos são necessários.');
         }
-        // Verifica se o funcionario (funcionario_id) fornecido na requisição existe na tabela funcionario
-        const funcionario = await funcionarioModel_1.default.findByPk(parseInt(funcionario_id)); // Convertendo para número
+        const funcionario = await funcionarioModel_1.default.findByPk(funcionario_id);
         if (!funcionario) {
             console.error('Funcionário não encontrado');
             return res.status(404).send('Funcionário não encontrado.');
         }
-        await (0, servicoRepository_1.criarServico)(funcionario_id, titulo, status, prazo_resolucao);
+        await (0, servicoRepository_1.criarServico)(filialServico_id, tipo_servico_id, funcionario_id, responsavel, titulo, status, prazo_resolucao, prazo_proposto, data_finalizacao);
         console.log('Serviço cadastrado com sucesso.');
         res.status(201).send('Serviço cadastrado com sucesso.');
     }
@@ -61,11 +60,11 @@ const deleteServicoByIdController = async (req, res) => {
     try {
         const { id } = req.params;
         const result = await (0, servicoRepository_1.deleteServicoById)(parseInt(id, 10));
-        return result;
+        return res.status(200).send('Serviço deletado com sucesso!');
     }
     catch (error) {
         console.error('Erro ao deletar serviço:', error);
-        throw new Error('Erro ao deletar serviço por ID.');
+        res.status(500).send('Erro ao deletar serviço por ID.');
     }
 };
 exports.deleteServicoByIdController = deleteServicoByIdController;
