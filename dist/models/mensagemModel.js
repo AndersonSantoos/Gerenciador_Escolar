@@ -11,8 +11,8 @@ class Mensagem extends sequelize_1.Model {
 }
 Mensagem.init({
     id: {
-        type: sequelize_1.DataTypes.UUID, // Mudança para DataTypes.UUID
-        defaultValue: () => (0, uuid_1.v4)(), // Gerando UUID padrão
+        type: sequelize_1.DataTypes.UUID,
+        defaultValue: () => (0, uuid_1.v4)(),
         primaryKey: true,
     },
     servico_id: {

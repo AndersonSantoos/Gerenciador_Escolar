@@ -12,8 +12,8 @@ class Mensagem extends Model {
 Mensagem.init(
     {
         id: {
-            type: DataTypes.UUID, // Mudança para DataTypes.UUID
-            defaultValue: () => uuidv4(), // Gerando UUID padrão
+            type: DataTypes.UUID, 
+            defaultValue: () => uuidv4(), 
             primaryKey: true,
         },
         servico_id: {

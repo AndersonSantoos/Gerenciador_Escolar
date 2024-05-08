@@ -2,16 +2,18 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
 import Servico from './servicoModel';
 import Mensagem from './mensagemModel';
+import Funcionario from './funcionarioModel';
 
 class Anexo extends Model {
-    public anexo_id!: number;
+    public id!: number;
     public servico_id!: number;
-    public mensagem!: number;
+    public mensagem_id!: number;
+    public funcionario_id!: number;
 }
 
 Anexo.init(
     {
-        anexo_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -21,7 +23,7 @@ Anexo.init(
             allowNull: false,
             references: {
                 model: Servico,
-                key: 'servico_id'
+                key: 'id'
             },
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
@@ -31,7 +33,17 @@ Anexo.init(
             allowNull: false,
             references: {
                 model: Mensagem,
-                key: 'mensagem_id'
+                key: 'id'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+        },
+        funcionario_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: Funcionario,
+                key: 'id'
             },
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
@@ -41,7 +53,8 @@ Anexo.init(
         tableName: 'Anexo'
 });
 
-Anexo.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'});
-Anexo.belongsTo(Mensagem, {foreignKey: 'mensagem_id', as: 'mensagem'});
+Anexo.belongsTo(Servico, {foreignKey: 'id', as: 'servico'});
+Anexo.belongsTo(Mensagem, {foreignKey: 'id', as: 'mensagem'});
+Anexo.belongsTo(Funcionario, {foreignKey: 'id', as: 'funcionario'});
 
 export default Anexo;
