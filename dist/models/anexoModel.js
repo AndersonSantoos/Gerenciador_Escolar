@@ -27,7 +27,7 @@ Anexo.init({
         onUpdate: 'CASCADE',
     },
     mensagem_id: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.UUID,
         allowNull: false,
         references: {
             model: mensagemModel_1.default,
@@ -51,6 +51,6 @@ Anexo.init({
     tableName: 'Anexo'
 });
 Anexo.belongsTo(servicoModel_1.default, { foreignKey: 'id', as: 'servico' });
-Anexo.belongsTo(mensagemModel_1.default, { foreignKey: 'id', as: 'mensagem' });
+Anexo.belongsTo(mensagemModel_1.default, { foreignKey: 'mensagem_id', as: 'mensagem' });
 Anexo.belongsTo(funcionarioModel_1.default, { foreignKey: 'id', as: 'funcionario' });
 exports.default = Anexo;

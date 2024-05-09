@@ -36,5 +36,5 @@ Mensagem.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'Mensagem'
 });
-Mensagem.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' }); // Corrigindo a chave estrangeira
+Mensagem.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' });
 exports.default = Mensagem;

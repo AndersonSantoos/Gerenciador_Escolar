@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Servico from './servicoModel';
 
 class Mensagem extends Model {
-    public id!: string; // Alterando para string para UUID
+    public id!: string; 
     public servico_id!: number;
     public descricao!: string;
 }
@@ -38,6 +38,6 @@ Mensagem.init(
         tableName: 'Mensagem'
 });
 
-Mensagem.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'}); // Corrigindo a chave estrangeira
+Mensagem.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'}); 
 
 export default Mensagem;
