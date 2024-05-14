@@ -4,6 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon dist/server.js",
+    "migrate": "sequelize db:migrate --migrations-path dist/migrations",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

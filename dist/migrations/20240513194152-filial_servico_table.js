@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('filialServico', {
+        await queryInterface.createTable('FilialServico', {
             id: {
                 type: sequelize_1.DataTypes.INTEGER,
                 autoIncrement: true,
@@ -18,17 +18,15 @@ module.exports = {
             },
             createdAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             },
             updatedAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             }
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('filialServico');
+        await queryInterface.dropTable('FilialServico');
     }
 };

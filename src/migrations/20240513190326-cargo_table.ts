@@ -1,3 +1,4 @@
+'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
@@ -39,7 +40,6 @@ module.exports = {
       }
     });
   },
-
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
     await queryInterface.dropTable('Cargo');
   }

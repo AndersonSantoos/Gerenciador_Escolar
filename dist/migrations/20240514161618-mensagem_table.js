@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
         await queryInterface.createTable('Mensagem', {
             id: {
                 type: sequelize_1.DataTypes.UUID,
-                defaultValue: Sequelize.literal('uuid_generate_v4()'), // Se estiver usando PostgreSQL
+                defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
             servico_id: {
@@ -28,13 +28,11 @@ module.exports = {
             },
             createdAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             },
             updatedAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             }
         });
     },

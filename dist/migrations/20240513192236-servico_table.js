@@ -9,11 +9,11 @@ module.exports = {
                 autoIncrement: true,
                 primaryKey: true
             },
-            filialServico_id: {
+            filial_id: {
                 type: sequelize_1.DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'FilialServico',
+                    model: 'Filial',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',
@@ -65,13 +65,11 @@ module.exports = {
             },
             createdAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             },
             updatedAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             }
         });
     },

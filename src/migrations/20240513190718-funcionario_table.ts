@@ -1,8 +1,9 @@
+'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
   up: async (queryInterface: QueryInterface, Sequelize: any) => {
-    await queryInterface.createTable('Funcionarios', {
+    await queryInterface.createTable('Funcionario', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,7 +13,7 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Cargos',
+          model: 'Cargo',
           key: 'id'
         }
       },
@@ -20,7 +21,7 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Filiais',
+          model: 'Filial',
           key: 'id'
         }
       },
@@ -50,34 +51,31 @@ module.exports = {
       }
     });
 
-    // Adicione as chaves estrangeiras
-    await queryInterface.addConstraint('Funcionarios', {
+    await queryInterface.addConstraint('Funcionario', {
       fields: ['cargo_id'],
       type: 'foreign key',
-      name: 'funcionarios_cargo_id_fk',
+      name: 'funcionario_cargo_id_fk',
       references: {
-        table: 'Cargos',
+        table: 'Cargo',
         field: 'id'
       },
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE' 
     });
 
-    await queryInterface.addConstraint('Funcionarios', {
+    await queryInterface.addConstraint('Funcionario', {
       fields: ['filial_id'],
       type: 'foreign key',
-      name: 'funcionarios_filial_id_fk',
+      name: 'funcionario_filial_id_fk',
       references: {
-        table: 'Filiais',
+        table: 'Filial',
         field: 'id'
       },
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE' 
     });
   },
-
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
-    // Desfaça a criação da tabela
-    await queryInterface.dropTable('Funcionarios');
+    await queryInterface.dropTable('Funcionario');
   }
 };

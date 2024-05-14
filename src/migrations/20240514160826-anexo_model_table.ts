@@ -1,3 +1,4 @@
+'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
@@ -40,17 +41,14 @@ module.exports = {
       },
       createdAt: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        allowNull: false
       },
       updatedAt: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        allowNull: false
       }
     });
   },
-
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
     await queryInterface.dropTable('Anexo');
   }

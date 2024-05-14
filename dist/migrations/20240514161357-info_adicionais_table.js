@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = {
@@ -28,13 +28,11 @@ module.exports = {
             },
             createdAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             },
             updatedAt: {
                 type: sequelize_1.DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+                allowNull: false
             }
         });
     },

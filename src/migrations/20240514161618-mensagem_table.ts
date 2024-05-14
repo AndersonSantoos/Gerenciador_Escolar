@@ -1,3 +1,4 @@
+'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
@@ -5,7 +6,7 @@ module.exports = {
     await queryInterface.createTable('Mensagem', {
       id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'), // Se estiver usando PostgreSQL
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true
       },
       servico_id: {
@@ -27,17 +28,14 @@ module.exports = {
       },
       createdAt: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        allowNull: false
       },
       updatedAt: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        allowNull: false
       }
     });
   },
-
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
     await queryInterface.dropTable('Mensagem');
   }
