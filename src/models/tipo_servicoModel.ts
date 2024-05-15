@@ -27,7 +27,7 @@ Tipo_servico.init(
             }
         },
         nome: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: { msg: "Campo não pode ser vazio."}

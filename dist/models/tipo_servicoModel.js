@@ -23,7 +23,7 @@ Tipo_servico.init({
         }
     },
     nome: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: { msg: "Campo não pode ser vazio." }
