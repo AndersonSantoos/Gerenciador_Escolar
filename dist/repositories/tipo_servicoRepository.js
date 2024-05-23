@@ -3,39 +3,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTipo_servicoById = exports.updateTipo_servicoById = exports.getTipo_servicoById = exports.criarTipoServico = void 0;
-// repositories/tipo_servicoRepository.ts
+exports.deleteTipo_servicoById = exports.updateTipo_servicoById = exports.getTipo_servicoById = exports.criarTipo_servico = void 0;
 const tipo_servicoModel_1 = __importDefault(require("../models/tipo_servicoModel"));
-const criarTipoServico = async (setor_responsavel_id, nome, status, prazo_resolucao, prazo_minimo) => {
+const criarTipo_servico = async (servico_id, tipo) => {
     try {
-        const tipoServico = await tipo_servicoModel_1.default.create({
-            setor_responsavel_id,
-            nome,
-            status,
-            prazo_resolucao,
-            prazo_minimo
-        });
-        console.log('Tipo de serviço criado:', tipoServico.toJSON());
-        return tipoServico.toJSON();
+        return await tipo_servicoModel_1.default.create({ servico_id, tipo });
     }
     catch (error) {
-        console.error('Erro ao criar tipo de serviço:', error);
+        console.error('Erro ao criar tipo de serviço.');
         throw error;
     }
 };
-exports.criarTipoServico = criarTipoServico;
+exports.criarTipo_servico = criarTipo_servico;
 const getTipo_servicoById = async (id) => {
-    try {
-        const tipo_servico = await tipo_servicoModel_1.default.findByPk(id);
-        if (!tipo_servico) {
-            throw new Error('Tipo de serviço não encontrado.');
-        }
-        return tipo_servico;
+    const tipo_servico = await tipo_servicoModel_1.default.findByPk(id);
+    if (!tipo_servico) {
+        throw new Error('Tipo de serviço não encontrado.');
     }
-    catch (error) {
-        console.error('Erro ao buscar tipo de serviço por ID.', error);
-        throw error;
-    }
+    return tipo_servico;
 };
 exports.getTipo_servicoById = getTipo_servicoById;
 const updateTipo_servicoById = async (id, newData) => {
@@ -44,13 +29,12 @@ const updateTipo_servicoById = async (id, newData) => {
         if (!tipo_servico) {
             throw new Error('Tipo de serviço não encontrado.');
         }
-        await tipo_servicoModel_1.default.update(newData, { where: { id } });
+        await tipo_servicoModel_1.default.update(newData, { where: { id: id } });
         const tipo_servicoAtualizado = await tipo_servicoModel_1.default.findByPk(id);
         return tipo_servicoAtualizado;
     }
     catch (error) {
-        console.error('Erro na atualização do tipo de serviço por ID.', error);
-        throw error;
+        throw new Error('Erro na atualização do tipo de serviço por ID.');
     }
 };
 exports.updateTipo_servicoById = updateTipo_servicoById;
@@ -61,11 +45,10 @@ const deleteTipo_servicoById = async (id) => {
             throw new Error('Tipo de serviço não encontrado.');
         }
         await tipo_servico.destroy();
-        return 'Tipo de serviço deletado com sucesso!';
+        return ('Tipo de serviço deletado com sucesso!');
     }
     catch (error) {
-        console.error('Erro enquanto deletava o tipo de serviço pelo ID.', error);
-        throw error;
+        throw new Error('Erro enquanto deletava o tipo de serviço pelo ID.');
     }
 };
 exports.deleteTipo_servicoById = deleteTipo_servicoById;

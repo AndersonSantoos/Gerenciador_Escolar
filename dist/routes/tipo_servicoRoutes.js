@@ -39,7 +39,7 @@ router.put('/tipo_servico/:id', async (req, res) => {
 });
 router.delete('/tipo_servico/:id', async (req, res) => {
     try {
-        const result = await (0, tipo_servicoController_1.deleteTipo_servicoControllerById)(req, res);
+        const result = await (0, tipo_servicoController_1.deleteCargoControllerById)(req, res);
         res.status(200).json({ message: result });
     }
     catch (error) {
