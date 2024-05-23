@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// models/tipo_servicoModel.ts
 const sequelize_1 = require("sequelize");
 const dbConfig_1 = require("../database/dbConfig");
 const setorResponsavelModel_1 = __importDefault(require("./setorResponsavelModel"));
@@ -37,14 +38,14 @@ Tipo_servico.init({
         }
     },
     prazo_resolucao: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.DATE,
         allowNull: false,
         validate: {
             notEmpty: { msg: 'Campo não pode estar vazio' }
         }
     },
     prazo_minimo: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.DATE,
         allowNull: false,
         validate: {
             notEmpty: { msg: 'Campo não pode estar vazio' }
@@ -54,5 +55,5 @@ Tipo_servico.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'tipo_servico'
 });
-Tipo_servico.belongsTo(setorResponsavelModel_1.default, { foreignKey: 'id', as: 'setorResponsavel' });
+Tipo_servico.belongsTo(setorResponsavelModel_1.default, { foreignKey: 'setor_responsavel_id', as: 'setorResponsavel' });
 exports.default = Tipo_servico;

@@ -14,7 +14,7 @@ router.post('/registrarSetorResposnavel', async (req: Request, res: Response) =>
     }
 });
 
-router.get('/setorResponsavel/id', async (req: Request, res: Response) => {
+router.get('/setorResponsavel/:id', async (req: Request, res: Response) => {
     try {
         const cargo = await getSetorResponsavelControllerById(req, res);
         

@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {

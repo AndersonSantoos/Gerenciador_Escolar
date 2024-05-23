@@ -9,8 +9,8 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const funcionarioRepository_1 = require("../repositories/funcionarioRepository");
 const criarFuncionarioController = async (req, res) => {
     try {
-        const { cargo_id, nome, status, email, filial, senha, confirmSenha } = req.body;
-        if (!cargo_id || !nome || !status || !email || !filial || !senha || !confirmSenha) {
+        const { cargo_id, filial_id, nome, status, email, senha, confirmSenha } = req.body;
+        if (!cargo_id || !filial_id || !nome || !status || !email || !senha || !confirmSenha) {
             console.error('Todos os campos são necessários.');
             return res.status(400).send('Todos os campos são necessários.');
         }
@@ -25,7 +25,7 @@ const criarFuncionarioController = async (req, res) => {
             return res.status(404).send('Cargo não encontrado.');
         }
         const hashedSenha = await bcrypt_1.default.hash(senha, 10);
-        await (0, funcionarioRepository_1.criarFuncionario)(cargo_id, nome, status, email, filial, hashedSenha);
+        await (0, funcionarioRepository_1.criarFuncionario)(cargo_id, filial_id, nome, status, email, hashedSenha);
         console.log('Funcionário cadastrado com sucesso.');
         res.status(201).send('Funcionário cadastrado com sucesso.');
     }

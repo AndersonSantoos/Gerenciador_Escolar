@@ -14,7 +14,7 @@ router.post('/registrarCargo', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-router.get('/cargo/id', async (req, res) => {
+router.get('/cargo/:id', async (req, res) => {
     try {
         const cargo = await (0, cargoController_1.getCargoControllerById)(req, res);
         if (cargo === null) {

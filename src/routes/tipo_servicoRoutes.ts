@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { criarTipo_servicoController,
          getTipo_servicoControllerById,
          updateTipo_servicoControllerById,
-         deleteCargoControllerById } from "../controllers/tipo_servicoController";
+         deleteTipo_servicoControllerById } from "../controllers/tipo_servicoController";
 
 const router = express.Router();
 
@@ -39,7 +39,7 @@ router.put('/tipo_servico/:id', async (req: Request, res: Response) => {
 
 router.delete('/tipo_servico/:id', async (req: Request, res: Response) => {
     try {
-      const result = await deleteCargoControllerById(req, res);
+      const result = await  deleteTipo_servicoControllerById(req, res);
       res.status(200).json({ message: result });
     } catch (error) {
       console.error('Erro na rota:', error);

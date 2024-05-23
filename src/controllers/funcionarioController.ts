@@ -9,8 +9,8 @@ import {criarFuncionario,
   
 export const criarFuncionarioController = async ( req: Request, res: Response ) => {
     try {
-        const { cargo_id, nome, status, email, filial, senha, confirmSenha } = req.body;
-        if(!cargo_id || !nome || !status || !email || !filial || !senha || !confirmSenha) {
+        const { cargo_id, filial_id, nome, status, email, senha, confirmSenha } = req.body;
+        if(!cargo_id || !filial_id || !nome || !status || !email || !senha || !confirmSenha) {
             console.error('Todos os campos são necessários.');
             return res.status(400).send('Todos os campos são necessários.');
         }
@@ -25,7 +25,7 @@ export const criarFuncionarioController = async ( req: Request, res: Response ) 
         return res.status(404).send('Cargo não encontrado.');
     }
     const hashedSenha = await bcrypt.hash(senha, 10);
-    await criarFuncionario(cargo_id, nome, status, email, filial, hashedSenha);
+    await criarFuncionario(cargo_id, filial_id, nome, status, email, hashedSenha);
     console.log('Funcionário cadastrado com sucesso.');
     res.status(201).send('Funcionário cadastrado com sucesso.')
     } catch ( error ) {

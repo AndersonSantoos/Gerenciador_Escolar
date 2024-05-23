@@ -14,7 +14,7 @@ router.post('/registrarCargo', async (req: Request, res: Response) =>{
     }
 });
 
-router.get('/cargo/id', async (req: Request, res: Response) => {
+router.get('/cargo/:id', async (req: Request, res: Response) => {
     try {
         const cargo = await getCargoControllerById(req, res);
         

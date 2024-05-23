@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteFuncionarioById = exports.updateFuncionarioById = exports.getFuncionarioById = exports.criarFuncionario = void 0;
 const funcionarioModel_1 = __importDefault(require("../models/funcionarioModel"));
-const criarFuncionario = async (cargo_id, nome, status, email, filial, senha) => {
+const criarFuncionario = async (cargo_id, filial_id, nome, status, email, senha) => {
     try {
-        return await funcionarioModel_1.default.create({ cargo_id, nome, status, email, filial, senha });
+        return await funcionarioModel_1.default.create({ cargo_id, filial_id, nome, status, email, senha });
     }
     catch (error) {
         console.error('Erro ao criar funcionário', error);

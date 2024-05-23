@@ -1,3 +1,4 @@
+// models/tipo_servicoModel.ts
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/dbConfig';
 import SetorResponsavel from './setorResponsavelModel';
@@ -7,8 +8,8 @@ class Tipo_servico extends Model {
     public setor_responsavel_id!: number;
     public nome!: string;
     public status!: boolean;
-    public prazo_resolucao!: number;
-    public prazo_minimo!: number;
+    public prazo_resolucao!: Date;
+    public prazo_minimo!: Date;
 }
 
 Tipo_servico.init(
@@ -41,25 +42,24 @@ Tipo_servico.init(
             }
         },
         prazo_resolucao: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false,
             validate: {
                 notEmpty: { msg: 'Campo não pode estar vazio' }
             }
         }, 
         prazo_minimo: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false,
             validate: {
                 notEmpty: { msg: 'Campo não pode estar vazio' }
             }
         }, 
-
     }, {
         sequelize,
         tableName: 'tipo_servico'
 });
 
-Tipo_servico.belongsTo(SetorResponsavel, { foreignKey: 'id', as: 'setorResponsavel'});
+Tipo_servico.belongsTo(SetorResponsavel, { foreignKey: 'setor_responsavel_id', as: 'setorResponsavel' });
 
 export default Tipo_servico;

@@ -2,14 +2,14 @@ import Funcionario from '../models/funcionarioModel';
 
 export const criarFuncionario = async (
     cargo_id: number,
+    filial_id: number,
     nome: string,
     status: boolean,
     email: string,
-    filial: number,
     senha: string
 ) => {
     try {
-        return await Funcionario.create({ cargo_id, nome, status, email, filial, senha });
+        return await Funcionario.create({ cargo_id, filial_id, nome, status, email, senha });
     } catch (error) {
         console.error('Erro ao criar funcionário', error);
         throw error;
