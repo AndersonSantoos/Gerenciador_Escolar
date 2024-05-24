@@ -86,7 +86,6 @@ Servico.init({
     tableName: 'Servico',
     hooks: {
         beforeSave: async (servico) => {
-            // Aqui você pode adicionar lógica de pré-processamento antes de salvar o serviço, se necessário
         }
     }
 });

@@ -60,7 +60,7 @@ const deleteServicoByIdController = async (req, res) => {
     try {
         const { id } = req.params;
         const result = await (0, servicoRepository_1.deleteServicoById)(parseInt(id, 10));
-        return res.status(200).send('Serviço deletado com sucesso!');
+        return result;
     }
     catch (error) {
         console.error('Erro ao deletar serviço:', error);

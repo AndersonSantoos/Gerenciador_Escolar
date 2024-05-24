@@ -14,22 +14,22 @@ router.post('/registrarMensagem', async (req: Request, res: Response) => {
     }
 });
 
-router.get('/mensagem/:id', async (req: Request, res: Response) => {
+router.get('/mensagem/:uuid', async (req: Request, res: Response) => {
     try {
         const mensagem = await getMensagemControllerById(req, res);
         
-        if (mensagem === undefined) {
-            return res.status(404).send('Mensagem não encontrada.');
+        if (mensagem === null) {
+            return res.status(404).json({ message: 'Mensagem não encontrada' });
+        } else {
+            return res.status(200).json(mensagem);
         }
-
-        res.status(200).json(mensagem);
     } catch (error) {
         console.error('Erro na rota:', error);
-        res.status(500).json({ error: 'Erro interno do servidor.' });
+        return res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 });
 
-router.put('/mensagem/:id', async (req: Request, res: Response) => {
+router.put('/mensagem/:uuid', async (req: Request, res: Response) => {
     try {
         await updateMensagemControllerById(req, res); 
     } catch (error) {
@@ -38,10 +38,9 @@ router.put('/mensagem/:id', async (req: Request, res: Response) => {
     }
 });
 
-router.delete('/mensagem/:id', async (req: Request, res: Response) => {
+router.delete('/mensagem/:uuid', async (req: Request, res: Response) => {
     try {
-        const result = await deleteMensagemControllerById(req, res);
-        res.status(200).json({ message: result });
+        await deleteMensagemControllerById(req, res);
     } catch (error) {
         console.error('Erro na rota', error);
         res.status(500).json('Erro interno do servidor.');

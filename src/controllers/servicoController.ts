@@ -57,9 +57,10 @@ export const deleteServicoByIdController = async (req: Request, res: Response) =
     try {
         const { id } = req.params;
         const result = await deleteServicoById(parseInt(id, 10));
-        return res.status(200).send('Serviço deletado com sucesso!');
+        return result;
     } catch (error) {
         console.error('Erro ao deletar serviço:', error);
         res.status(500).send('Erro ao deletar serviço por ID.');
     }
 };
+

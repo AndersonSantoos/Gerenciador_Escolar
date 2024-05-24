@@ -1,29 +1,34 @@
 import { Request, Response } from 'express';
-import Servico from '../models/servicoModel'
+import SetorResponsavel from '../models/setorResponsavelModel';
 import { criarTipo_servico,
          getTipo_servicoById,
          updateTipo_servicoById,
          deleteTipo_servicoById } from '../repositories/tipo_servicoRepository';
 
 export const criarTipo_servicoController = async (req: Request, res: Response) => {
-    try {
-        const { servico_id, tipo } = req.body;
-        if(!servico_id || !tipo) {
+     try {
+        const { setor_responsavel_id, nome, status, prazo_resolucao, prazo_minimo } = req.body;
+                
+        // Verifica se todos os campos necessários foram fornecidos
+        if (!setor_responsavel_id || !nome || status === undefined || !prazo_resolucao || !prazo_minimo) {
             console.error('Todos os campos são necessários.');
             return res.status(400).send('Todos os campos são necessários.');
+            }
+
+            // Verifica se o setor responsável (setor_responsavel_id) fornecido na requisição existe na tabela SetorResponsavel
+        const setor = await SetorResponsavel.findByPk(parseInt(setor_responsavel_id));
+        if (!setor) {
+            console.error('Setor responsável não encontrado.');
+            return res.status(404).send('Setor responsável não encontrado.');
         }
-        // Verifica se o serviço (serviço_id) fornecido na requisição existe na tabela Serviço
-        const servico = await Servico.findByPk(parseInt(servico_id)); // Convertendo para número
-        if (!servico) {
-        console.error('Serviço não encontrado.');
-        return res.status(404).send('Serviço não encontrado.');
-    }
-        const tipo_servicoAtualizado = await criarTipo_servico(servico_id, tipo);
-        res.status(201).json(tipo_servicoAtualizado);
-    } catch (error) {
-        console.error('Erro ao criar tipo de serviço', error);
-        res.status(500).json({ message: 'Erro ao criar tipo de serviço.' });
-    }
+        
+            // Cria o tipo de serviço usando a função do repositório
+            const tipo_servicoCriado = await criarTipo_servico(setor_responsavel_id, nome, status, prazo_resolucao, prazo_minimo);
+            res.status(201).json(tipo_servicoCriado);
+            } catch (error) {
+            console.error('Erro ao criar tipo de serviço', error);
+            res.status(500).json({ message: 'Erro ao criar tipo de serviço.' });
+            }
 };
 
 export const getTipo_servicoControllerById = async (req: Request, res: Response) => {
@@ -45,6 +50,7 @@ export const updateTipo_servicoControllerById = async (req: Request, res: Respon
     const { id } = req.params;
     const newData = req.body;
     try {
+        // Atualiza o tipo de serviço usando a função do repositório
         const tipo_servicoAtualizado = await updateTipo_servicoById(parseInt(id, 10), newData);
         res.status(200).json(tipo_servicoAtualizado);
     } catch (error) {
@@ -53,7 +59,7 @@ export const updateTipo_servicoControllerById = async (req: Request, res: Respon
     }
 };
 
-export const deleteCargoControllerById = async (req: Request, res: Response) => {
+export const deleteTipo_servicoControllerById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const result = await deleteTipo_servicoById(parseInt(id, 10));

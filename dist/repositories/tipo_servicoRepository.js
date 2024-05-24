@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTipo_servicoById = exports.updateTipo_servicoById = exports.getTipo_servicoById = exports.criarTipo_servico = void 0;
 const tipo_servicoModel_1 = __importDefault(require("../models/tipo_servicoModel"));
-const criarTipo_servico = async (servico_id, tipo) => {
+const criarTipo_servico = async (setor_responsavel_id, nome, status, prazo_resolucao, prazo_minimo) => {
     try {
-        return await tipo_servicoModel_1.default.create({ servico_id, tipo });
+        return await tipo_servicoModel_1.default.create({ setor_responsavel_id, nome, status, prazo_resolucao, prazo_minimo });
     }
     catch (error) {
         console.error('Erro ao criar tipo de serviço.');

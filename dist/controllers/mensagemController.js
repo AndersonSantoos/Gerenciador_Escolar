@@ -15,10 +15,10 @@ const criarMensagemController = async (req, res) => {
 };
 exports.criarMensagemController = criarMensagemController;
 const getMensagemControllerById = async (req, res) => {
-    const { id } = req.params;
+    const { uuid } = req.params;
     try {
-        const mensagem = await (0, mensagemRepository_1.getMensagemById)(id);
-        if (!mensagem) {
+        const mensagem = await (0, mensagemRepository_1.getMensagemById)(uuid);
+        if (mensagem === null) {
             res.status(404).json({ message: 'Mensagem não encontrada' });
         }
         else {
@@ -32,27 +32,27 @@ const getMensagemControllerById = async (req, res) => {
 };
 exports.getMensagemControllerById = getMensagemControllerById;
 const updateMensagemControllerById = async (req, res) => {
-    const { id } = req.params;
+    const { uuid } = req.params;
     const newData = req.body;
     try {
-        const mensagemAtualizada = await (0, mensagemRepository_1.updateMensagemById)(id, newData);
+        const mensagemAtualizada = await (0, mensagemRepository_1.updateMensagemById)(uuid, newData);
         res.status(200).json(mensagemAtualizada);
     }
     catch (error) {
-        console.error('Erro ao atualizar mensagem por ID', error);
-        res.status(500).json({ message: 'Erro ao atualizar cargo por ID' });
+        console.error('Erro ao atualizar mensagem por UUID', error); // Aqui você deve indicar que o erro está relacionado ao UUID
+        res.status(500).json({ message: 'Erro ao atualizar mensagem por UUID' }); // Aqui você também atualiza a mensagem de erro
     }
 };
 exports.updateMensagemControllerById = updateMensagemControllerById;
 const deleteMensagemControllerById = async (req, res) => {
     try {
-        const { id } = req.params;
-        await (0, mensagemRepository_1.deleteMensagemById)(id);
+        const { uuid } = req.params;
+        await (0, mensagemRepository_1.deleteMensagemById)(uuid);
         res.status(200).json({ message: 'Mensagem deletada com sucesso!' });
     }
     catch (error) {
-        console.error('Erro ao excluir mensagem por ID', error);
-        res.status(500).json({ message: 'Erro ao excluir mensagem por ID' });
+        console.error('Erro ao excluir mensagem por UUID', error);
+        res.status(500).json({ message: 'Erro ao excluir mensagem por UUID' });
     }
 };
 exports.deleteMensagemControllerById = deleteMensagemControllerById;

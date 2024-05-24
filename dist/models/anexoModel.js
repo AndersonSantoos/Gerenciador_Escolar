@@ -50,7 +50,7 @@ Anexo.init({
     sequelize: dbConfig_1.sequelize,
     tableName: 'Anexo'
 });
-Anexo.belongsTo(servicoModel_1.default, { foreignKey: 'id', as: 'servico' });
+Anexo.belongsTo(servicoModel_1.default, { foreignKey: 'servico_id', as: 'servico' });
 Anexo.belongsTo(mensagemModel_1.default, { foreignKey: 'mensagem_id', as: 'mensagem' });
-Anexo.belongsTo(funcionarioModel_1.default, { foreignKey: 'id', as: 'funcionario' });
+Anexo.belongsTo(funcionarioModel_1.default, { foreignKey: 'funcionario_id', as: 'funcionario' });
 exports.default = Anexo;

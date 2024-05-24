@@ -18,7 +18,7 @@ router.get('/tipo_servico/:id', async (req, res) => {
     try {
         const servico = await (0, tipo_servicoController_1.getTipo_servicoControllerById)(req, res);
         if (servico === null) {
-            return res.status(404).send('Fucnionário não encontrado.');
+            return res.status(404).send('Tipo de serviço não encontrado.');
         }
         res.status(200).json(servico);
     }
@@ -39,8 +39,8 @@ router.put('/tipo_servico/:id', async (req, res) => {
 });
 router.delete('/tipo_servico/:id', async (req, res) => {
     try {
-        const result = await (0, tipo_servicoController_1.deleteCargoControllerById)(req, res);
-        res.status(200).json({ message: result });
+        const result = await (0, tipo_servicoController_1.deleteTipo_servicoControllerById)(req, res); // Corrigido o nome da função
+        res.status(200).json({ message: result }); // Enviar resposta com o resultado da exclusão
     }
     catch (error) {
         console.error('Erro na rota:', error);

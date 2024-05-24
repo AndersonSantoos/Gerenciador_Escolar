@@ -7,7 +7,7 @@ import Funcionario from './funcionarioModel';
 class Anexo extends Model {
     public id!: number;
     public servico_id!: number;
-    public mensagem_id!: string;
+    public mensagem_id!: string; 
     public funcionario_id!: number;
 }
 
@@ -28,7 +28,7 @@ Anexo.init(
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         },
-        mensagem_id: {
+        mensagem_id: { 
             type: DataTypes.UUID, 
             allowNull: false,
             references: {
@@ -53,8 +53,8 @@ Anexo.init(
         tableName: 'Anexo'
 });
 
-Anexo.belongsTo(Servico, {foreignKey: 'id', as: 'servico'});
+Anexo.belongsTo(Servico, {foreignKey: 'servico_id', as: 'servico'});
 Anexo.belongsTo(Mensagem, {foreignKey: 'mensagem_id', as: 'mensagem'}); 
-Anexo.belongsTo(Funcionario, {foreignKey: 'id', as: 'funcionario'});
+Anexo.belongsTo(Funcionario, {foreignKey: 'funcionario_id', as: 'funcionario'}); 
 
 export default Anexo;
