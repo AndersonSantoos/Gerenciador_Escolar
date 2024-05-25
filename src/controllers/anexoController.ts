@@ -1,33 +1,38 @@
 import { Request, Response } from 'express';
-import { criarAnexo, getAnexoById, getServicoById, updateAnexoById, deleteAnexoById, getMensagemById, getFuncionarioById } from '../repositories/anexoRepository';
+import { criarAnexo, getAnexoById, getFuncionarioById, getServicoById, getMensagemById, updateAnexoById, deleteAnexoById } from '../repositories/anexoRepository';
 
 export const criarAnexoController = async (req: Request, res: Response) => {
     const { servico_id, mensagem_id, funcionario_id } = req.body;
-    try {
-        // Verificar se os IDs existem no banco de dados
-        const [mensagem, funcionario, servico] = await Promise.all([
+
+    // Função para verificar se os IDs existem
+    const verificarIDs = async () => {
+        const [servico, mensagem, funcionario] = await Promise.all([
+            getServicoById(servico_id),
             getMensagemById(mensagem_id),
-            getFuncionarioById(funcionario_id),
-            getServicoById(servico_id)
+            getFuncionarioById(funcionario_id)
         ]);
+
         if (!servico) {
-            return res.status(404).json({ message: 'Serviço não encontrado' });
+            throw new Error('Serviço não encontrado');
         }
-
         if (!mensagem) {
-            return res.status(404).json({ message: 'Mensagem não encontrada' });
+            throw new Error('Mensagem não encontrada');
         }
-
         if (!funcionario) {
-            return res.status(404).json({ message: 'Funcionário não encontrado' });
+            throw new Error('Funcionário não encontrado');
         }
+    };
 
-        // Se todos os dados existirem, cria o anexo
+    try {
+        // Verifica se os IDs existem
+        await verificarIDs();
+
+        // Se todos os IDs existirem, cria um novo anexo
         const novoAnexo = await criarAnexo(servico_id, mensagem_id, funcionario_id);
         res.status(201).json(novoAnexo);
-    } catch (error) {
-        console.error('Erro ao criar anexo:', error); // Adiciona mensagem de erro para facilitar a depuração
-        res.status(500).json({ message: 'Erro ao criar anexo' });
+    } catch (error: any) {
+        console.error('Erro ao criar anexo:', error);
+        res.status(500).json({ message: 'Erro ao criar anexo', error: error.message });
     }
 };
 

@@ -4,29 +4,33 @@ exports.deleteAnexoControllerById = exports.updateAnexoControllerById = exports.
 const anexoRepository_1 = require("../repositories/anexoRepository");
 const criarAnexoController = async (req, res) => {
     const { servico_id, mensagem_id, funcionario_id } = req.body;
-    try {
-        // Verificar se os IDs existem no banco de dados
-        const [mensagem, funcionario, servico] = await Promise.all([
+    // Função para verificar se os IDs existem
+    const verificarIDs = async () => {
+        const [servico, mensagem, funcionario] = await Promise.all([
+            (0, anexoRepository_1.getServicoById)(servico_id),
             (0, anexoRepository_1.getMensagemById)(mensagem_id),
-            (0, anexoRepository_1.getFuncionarioById)(funcionario_id),
-            (0, anexoRepository_1.getServicoById)(servico_id)
+            (0, anexoRepository_1.getFuncionarioById)(funcionario_id)
         ]);
         if (!servico) {
-            return res.status(404).json({ message: 'Serviço não encontrado' });
+            throw new Error('Serviço não encontrado');
         }
         if (!mensagem) {
-            return res.status(404).json({ message: 'Mensagem não encontrada' });
+            throw new Error('Mensagem não encontrada');
         }
         if (!funcionario) {
-            return res.status(404).json({ message: 'Funcionário não encontrado' });
+            throw new Error('Funcionário não encontrado');
         }
-        // Se todos os dados existirem, cria o anexo
+    };
+    try {
+        // Verifica se os IDs existem
+        await verificarIDs();
+        // Se todos os IDs existirem, cria um novo anexo
         const novoAnexo = await (0, anexoRepository_1.criarAnexo)(servico_id, mensagem_id, funcionario_id);
         res.status(201).json(novoAnexo);
     }
     catch (error) {
-        console.error('Erro ao criar anexo:', error); // Adiciona mensagem de erro para facilitar a depuração
-        res.status(500).json({ message: 'Erro ao criar anexo' });
+        console.error('Erro ao criar anexo:', error);
+        res.status(500).json({ message: 'Erro ao criar anexo', error: error.message });
     }
 };
 exports.criarAnexoController = criarAnexoController;
