@@ -3,17 +3,31 @@ import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
   up: async (queryInterface: QueryInterface, Sequelize: any) => {
-    await queryInterface.createTable('FilialServico', {
+    await queryInterface.createTable('Cargo', {
       id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
-      nome: {
+      funcao: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { msg: 'Campo não pode estar vazio' }
+        }
+      },
+      isLeader: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Campo não pode estar vazio' }
+        }
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Campo não pode estar vazio.'}
         }
       },
       createdAt: {
@@ -27,6 +41,6 @@ module.exports = {
     });
   },
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
-    await queryInterface.dropTable('FilialServico');
+    await queryInterface.dropTable('Cargo');
   }
 };

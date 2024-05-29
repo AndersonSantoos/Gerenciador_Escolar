@@ -1,33 +1,19 @@
-  'use strict';
+'use strict';
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
   up: async (queryInterface: QueryInterface, Sequelize: any) => {
-    await queryInterface.createTable('Cargo', {
+    await queryInterface.createTable('FilialServico', {
       id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
       },
-      funcao: {
+      nome: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-      },
-      isLeader: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: 'Campo não pode estar vazio' }
-        }
-      },
-      status: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: 'Campo não pode estar vazio.'}
         }
       },
       createdAt: {
@@ -41,6 +27,6 @@ module.exports = {
     });
   },
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
-    await queryInterface.dropTable('Cargo');
+    await queryInterface.dropTable('FilialServico');
   }
 };
