@@ -8,7 +8,7 @@ class Funcionario extends Model {
     public cargo_id!: number;
     public nome!: string;
     public senha!: string;
-    public status!: string;
+    public status!: boolean;
     public email!: string;
     public filial_id!: number; 
 }

@@ -6,6 +6,17 @@
     "start": "nodemon dist/server.js",
     "migrate": "sequelize db:migrate --migrations-path dist/migrations",
     "migrate:undo": "sequelize db:migrate:undo",
+    "seed:all": "ts-node dist/seeders/runAllSeeds.js",
+    "seed:cargo": "ts-node dist/seeders/20240530000228-cargoSeeder.js",
+    "seed:filial": "ts-node dist/seeders/20240530233517-filial.js",
+    "seed:funcionario": "ts-node dist/seeders/20240530234139-funcionario.js",
+    "seed:setorResponsavel": "ts-node dist/seeders/20240531000130-setor_responsavel.js",
+    "seed:tipo_servico": "ts-node dist/seeders/20240531002033-tipo_servico.js",
+    "seed:filial_servico": "ts-node dist/seeders/20240531005316-filial_servico.js",
+    "seed:servico": "ts-node dist/seeders/20240531010335-servico.js",
+    "seed:info": "ts-node dist/seeders/20240531230812-info_adicionais.js",
+    "seed:mensagem": "ts-node dist/seeders/20240531231704-mensagem.js",
+    "seed:anexo": "ts-node dist/seeders/20240531232124-anexo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -44,6 +55,7 @@
     "sequelize-cli-typescript": "^3.2.0-c",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }
