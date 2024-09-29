@@ -26,6 +26,7 @@ Uma aplicação destinada à gestão de solicitações de serviços dentro de um
 - JWT
 - Bcrypt
 - Sequelize
+- Express
 
 ## Instalação
 1. Clone o repositório:
